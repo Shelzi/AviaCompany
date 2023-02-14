@@ -1,4 +1,4 @@
-package com.solvd.AviaCompany;
+package com.solvd.AviaCompany.menu;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
