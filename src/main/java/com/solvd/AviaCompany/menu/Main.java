@@ -7,5 +7,6 @@ public class Main {
     public static void main(String[] args) {
         Logger logger = LogManager.getLogger(Main.class);
         logger.info("Starting");
+        logger.info("Test contribute from Anton Nemtsov");
     }
 }
