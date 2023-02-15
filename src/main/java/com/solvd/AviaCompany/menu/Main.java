@@ -2,10 +2,7 @@ package com.solvd.AviaCompany.menu;
 
 import com.mysql.cj.log.Log;
 import com.solvd.AviaCompany.hierarchy.Flight;
-import com.solvd.AviaCompany.menu.menuUtils.CaseALL;
-import com.solvd.AviaCompany.menu.menuUtils.CaseEXIT;
-import com.solvd.AviaCompany.menu.menuUtils.CasePRINT;
-import com.solvd.AviaCompany.menu.menuUtils.GetDAO;
+import com.solvd.AviaCompany.menu.menuUtils.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -66,7 +63,7 @@ public class Main {
                     //currentOption = CaseDELETE.delete(LOGGER, sc, choice);
                 }
                 case BOOK_FLIGHT -> {
-                    //currentOption = CaseBOOK_FLIGHT.book(LOGGER, sc, choice);
+                    currentOption = CaseBOOK_FLIGHT.book(LOGGER, sc, choice);
                 }
                 case EXIT -> {
                     currentOption = CaseEXIT.exit(LOGGER, sc, exit);
