@@ -219,3 +219,178 @@
 2023-02-15 10:42:45,957 INFO c.s.A.m.m.CaseEXIT [main] 
      * ARE YOU SURE (y/n):
 2023-02-15 10:42:47,534 INFO c.s.A.m.m.CaseEXIT [main]      * BYE...
+2023-02-15 10:54:10,963 INFO c.s.A.m.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * ADD
+(3)  * UPDATE
+(4)  * DELETE
+(5)  * BOOK_FLIGHT
+(0)  * EXIT
+
+2023-02-15 10:55:17,829 INFO c.s.A.m.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * ADD
+(3)  * UPDATE
+(4)  * DELETE
+(5)  * BOOK_FLIGHT
+(0)  * EXIT
+
+2023-02-15 10:56:07,379 INFO c.s.A.m.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * ADD
+(3)  * UPDATE
+(4)  * DELETE
+(5)  * BOOK_FLIGHT
+(0)  * EXIT
+
+2023-02-15 10:56:23,672 INFO c.s.A.m.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * ADD
+(3)  * UPDATE
+(4)  * DELETE
+(5)  * BOOK_FLIGHT
+(0)  * EXIT
+
+2023-02-15 10:56:59,789 INFO c.s.A.m.Main [main] Flight{ departure = 'Minsk'
+        destination = 'Vilnus'
+        cost = 200$
+        distance = 500 km
+        departure date = 2023-01-02, 12:00 }
+2023-02-15 10:56:59,794 INFO c.s.A.m.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * ADD
+(3)  * UPDATE
+(4)  * DELETE
+(5)  * BOOK_FLIGHT
+(0)  * EXIT
+
+2023-02-15 10:57:25,081 INFO c.s.A.m.Main [main] Flight{
+        departure = 'Minsk'
+        destination = 'Vilnus'
+        cost = 200$
+        distance = 500 km
+        departure date = 2023-01-02, 12:00 }
+2023-02-15 10:57:25,086 INFO c.s.A.m.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * ADD
+(3)  * UPDATE
+(4)  * DELETE
+(5)  * BOOK_FLIGHT
+(0)  * EXIT
+
+2023-02-15 10:57:30,828 INFO c.s.A.m.m.CaseEXIT [main] 
+     * ARE YOU SURE (y/n):
+2023-02-15 10:57:32,932 INFO c.s.A.m.m.CaseEXIT [main]      * BYE...
+2023-02-15 10:59:55,287 WARN c.s.A.m.Main [main] INVALID DATE
+2023-02-15 10:59:55,291 INFO c.s.A.m.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * ADD
+(3)  * UPDATE
+(4)  * DELETE
+(5)  * BOOK_FLIGHT
+(0)  * EXIT
+
+2023-02-15 11:03:25,469 INFO c.s.A.m.Main [main] Flight{
+        departure = 'Minsk'
+        destination = 'Vilnus'
+        cost = 200$
+        distance = 500 km
+        departure date = 2022-01-01, 09:00  T }
+2023-02-15 11:03:25,474 INFO c.s.A.m.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * ADD
+(3)  * UPDATE
+(4)  * DELETE
+(5)  * BOOK_FLIGHT
+(0)  * EXIT
+
+2023-02-15 11:04:43,668 INFO c.s.A.m.Main [main] Flight{
+        departure = 'Minsk'
+        destination = 'Vilnus'
+        cost = 200$
+        distance = 500 km
+        departure date = 2022-01-01, 09:00 UTC }
+2023-02-15 11:04:43,673 INFO c.s.A.m.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * ADD
+(3)  * UPDATE
+(4)  * DELETE
+(5)  * BOOK_FLIGHT
+(0)  * EXIT
+
+2023-02-15 11:07:02,341 INFO c.s.A.m.Main [main] Flight{
+        departure = 'Minsk'
+        destination = 'Vilnus'
+        cost = 200$
+        distance = 500 km
+        departure date = 2022-01-01, 09:00 sun.util.calendar.ZoneInfo[id="GMT",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null] }
+2023-02-15 11:07:02,345 INFO c.s.A.m.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * ADD
+(3)  * UPDATE
+(4)  * DELETE
+(5)  * BOOK_FLIGHT
+(0)  * EXIT
+
+2023-02-15 11:07:28,626 INFO c.s.A.m.Main [main] Flight{
+        departure = 'Minsk'
+        destination = 'Vilnus'
+        cost = 200$
+        distance = 500 km
+        departure date = 2022-01-01, 09:00 Greenwich Mean Time }
+2023-02-15 11:07:28,630 INFO c.s.A.m.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * ADD
+(3)  * UPDATE
+(4)  * DELETE
+(5)  * BOOK_FLIGHT
+(0)  * EXIT
+
+2023-02-15 11:07:47,404 INFO c.s.A.m.Main [main] Flight{
+        departure = 'Minsk'
+        destination = 'Vilnus'
+        cost = 200$
+        distance = 500 km
+        departure date = 2022-01-01, 09:00 Greenwich Mean Time }
+2023-02-15 11:07:47,409 INFO c.s.A.m.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * ADD
+(3)  * UPDATE
+(4)  * DELETE
+(5)  * BOOK_FLIGHT
+(0)  * EXIT
+
+2023-02-15 11:08:07,221 INFO c.s.A.m.Main [main] Flight{
+        departure = 'Minsk'
+        destination = 'Vilnus'
+        cost = 200$
+        distance = 500 km
+        departure date = 2022-01-01, 01:00 Pacific Standard Time }
+2023-02-15 11:08:07,226 INFO c.s.A.m.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * ADD
+(3)  * UPDATE
+(4)  * DELETE
+(5)  * BOOK_FLIGHT
+(0)  * EXIT
+
+2023-02-15 11:08:20,369 INFO c.s.A.m.m.GetDAO [main] 
+(1)  * AIRPORTS
+(2)  * FLIGHTS
+(3)  * PILOTS
+(4)  * PLANES
+(5)  * TICKETS
+
+(0)  * BACK
+
+2023-02-15 11:08:22,245 INFO c.s.A.m.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * ADD
+(3)  * UPDATE
+(4)  * DELETE
+(5)  * BOOK_FLIGHT
+(0)  * EXIT
+
+2023-02-15 11:08:29,852 INFO c.s.A.m.m.CaseEXIT [main] 
+     * ARE YOU SURE (y/n):
+2023-02-15 11:08:31,052 INFO c.s.A.m.m.CaseEXIT [main]      * BYE...

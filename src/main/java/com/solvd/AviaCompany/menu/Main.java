@@ -1,6 +1,7 @@
 package com.solvd.AviaCompany.menu;
 
 import com.mysql.cj.log.Log;
+import com.solvd.AviaCompany.hierarchy.Flight;
 import com.solvd.AviaCompany.menu.menuUtils.CaseALL;
 import com.solvd.AviaCompany.menu.menuUtils.CaseEXIT;
 import com.solvd.AviaCompany.menu.menuUtils.CasePRINT;
@@ -8,7 +9,11 @@ import com.solvd.AviaCompany.menu.menuUtils.GetDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
+import java.util.TimeZone;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main {
@@ -27,6 +32,15 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        try {
+            TimeZone timeZone = TimeZone.getTimeZone("America/Los_Angeles");
+            Flight flight = new Flight("Minsk", "Vilnus", 200, 500,
+                    new SimpleDateFormat("YYYY-MM-DD  hh:mm").parse("2023-02-10  12:00"), timeZone);
+            LOGGER.info(flight);
+        } catch (ParseException e) {
+            LOGGER.warn("INVALID DATE");
+        }
+
         Menu();
     }
 
@@ -52,7 +66,7 @@ public class Main {
                     //currentOption = CaseDELETE.delete(LOGGER, sc, choice);
                 }
                 case BOOK_FLIGHT -> {
-                    //currentOption = CaseBOOK_FLIGHT.delete(LOGGER, sc, choice);
+                    //currentOption = CaseBOOK_FLIGHT.book(LOGGER, sc, choice);
                 }
                 case EXIT -> {
                     currentOption = CaseEXIT.exit(LOGGER, sc, exit);
