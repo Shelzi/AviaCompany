@@ -1,4 +1,4 @@
-package com.solvd.AviaCompany.menu.menuUtils;
+package com.solvd.AviaCompany.utils.menu;
 
 import java.util.Scanner;
 

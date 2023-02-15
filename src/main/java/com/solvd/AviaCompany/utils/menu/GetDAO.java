@@ -1,4 +1,4 @@
-package com.solvd.AviaCompany.menu.menuUtils;
+package com.solvd.AviaCompany.utils.menu;
 
 import com.solvd.AviaCompany.db.DAO;
 import org.apache.logging.log4j.Logger;
