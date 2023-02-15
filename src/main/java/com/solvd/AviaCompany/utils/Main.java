@@ -1,14 +1,12 @@
-package com.solvd.AviaCompany.menu;
+package com.solvd.AviaCompany.utils;
 
-import com.mysql.cj.log.Log;
 import com.solvd.AviaCompany.hierarchy.Flight;
-import com.solvd.AviaCompany.menu.menuUtils.*;
+import com.solvd.AviaCompany.utils.menu.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 import java.util.TimeZone;
 import java.util.concurrent.atomic.AtomicBoolean;

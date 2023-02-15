@@ -1,8 +1,7 @@
-package com.solvd.AviaCompany.menu.menuUtils;
+package com.solvd.AviaCompany.utils.menu;
 
-import com.solvd.AviaCompany.db.DAO;
 import com.solvd.AviaCompany.hierarchy.Flight;
-import com.solvd.AviaCompany.menu.Main;
+import com.solvd.AviaCompany.utils.Main;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
