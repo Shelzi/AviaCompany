@@ -13,4 +13,8 @@ Contributors
 
 Algorithm
 --------------
-[Floyd–Warshall algorithm](https://en.wikipedia.org/wiki/Floyd–Warshall_algorithm)
+[Floyd–Warshall algorithm](https://en.wikipedia.org/wiki/Floyd–Warshall_algorithm)</p>
+
+**Complexity:**   $\Theta(|V|^3)$
+
+Where $V$ - amount of edges in graph
