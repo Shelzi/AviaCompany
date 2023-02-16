@@ -1,6 +1,6 @@
-package com.solvd.AviaCompany.menu.menuUtils;
+package com.solvd.AviaCompany.utils.menu;
 
-import com.solvd.AviaCompany.db.DAO;
+import com.solvd.AviaCompany.db.dao.IBaseDAO;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Scanner;
@@ -17,20 +17,20 @@ public class GetDAO {
         BACK
     }
     //  C : 57   I : 12
-    private static Logger LOGGER;
-    private static boolean myBatis = false;
-    private static GetDAO.AvailableOptions choice = GetDAO.AvailableOptions.BACK;
+    private Logger LOGGER;
+    private boolean myBatis = false;
+    private GetDAO.AvailableOptions choice = GetDAO.AvailableOptions.BACK;
 
-    public static GetDAO.AvailableOptions getChoice() {
+    public GetDAO.AvailableOptions getChoice() {
         return choice;
     }
 
-    public static void setMyBatis(boolean f) {
+    public void setMyBatis(boolean f) {
         myBatis = f;
     }
 
 
-    public static DAO getDAO(Scanner sc) {
+    public IBaseDAO getDAO(Scanner sc) {
         LOGGER.info("""
                                 
                 (1)  * AIRPORTS
@@ -41,7 +41,7 @@ public class GetDAO {
 
                 (0)  * BACK
                 """);
-        DAO dao = null;
+        IBaseDAO dao = null;
         int k = -1;
         boolean validInt = false;
         do {
@@ -83,8 +83,8 @@ public class GetDAO {
         return dao;
     }
 
-    public static GetDAO setLOGGER(Logger LOGGER) {
-        GetDAO.LOGGER = LOGGER;
+    public GetDAO setLOGGER(Logger LOGGER) {
+        this.LOGGER = LOGGER;
         return new GetDAO();
     }
 }

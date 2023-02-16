@@ -5,9 +5,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class Passenger {
+public class Country {
 
     private int id;
-    private String fname;
-    private String lname;
+    private String name;
 }
