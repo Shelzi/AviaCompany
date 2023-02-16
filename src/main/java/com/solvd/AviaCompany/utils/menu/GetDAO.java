@@ -17,20 +17,20 @@ public class GetDAO {
         BACK
     }
     //  C : 57   I : 12
-    private static Logger LOGGER;
-    private static boolean myBatis = false;
-    private static GetDAO.AvailableOptions choice = GetDAO.AvailableOptions.BACK;
+    private Logger LOGGER;
+    private boolean myBatis = false;
+    private GetDAO.AvailableOptions choice = GetDAO.AvailableOptions.BACK;
 
-    public static GetDAO.AvailableOptions getChoice() {
+    public GetDAO.AvailableOptions getChoice() {
         return choice;
     }
 
-    public static void setMyBatis(boolean f) {
+    public void setMyBatis(boolean f) {
         myBatis = f;
     }
 
 
-    public static DAO getDAO(Scanner sc) {
+    public DAO getDAO(Scanner sc) {
         LOGGER.info("""
                                 
                 (1)  * AIRPORTS
@@ -83,8 +83,8 @@ public class GetDAO {
         return dao;
     }
 
-    public static GetDAO setLOGGER(Logger LOGGER) {
-        GetDAO.LOGGER = LOGGER;
+    public GetDAO setLOGGER(Logger LOGGER) {
+        this.LOGGER = LOGGER;
         return new GetDAO();
     }
 }
