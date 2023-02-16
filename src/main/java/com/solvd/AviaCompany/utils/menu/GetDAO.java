@@ -1,6 +1,6 @@
 package com.solvd.AviaCompany.utils.menu;
 
-import com.solvd.AviaCompany.db.DAO;
+import com.solvd.AviaCompany.db.dao.IBaseDAO;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Scanner;
@@ -30,7 +30,7 @@ public class GetDAO {
     }
 
 
-    public DAO getDAO(Scanner sc) {
+    public IBaseDAO getDAO(Scanner sc) {
         LOGGER.info("""
                                 
                 (1)  * AIRPORTS
@@ -41,7 +41,7 @@ public class GetDAO {
 
                 (0)  * BACK
                 """);
-        DAO dao = null;
+        IBaseDAO dao = null;
         int k = -1;
         boolean validInt = false;
         do {

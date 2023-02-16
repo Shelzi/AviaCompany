@@ -1,8 +1,6 @@
 package com.solvd.AviaCompany.utils.menu;
 
 import com.solvd.AviaCompany.hierarchy.Flight;
-import com.solvd.AviaCompany.hierarchy.Ticket;
-import com.solvd.AviaCompany.utils.Main;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
