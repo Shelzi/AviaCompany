@@ -1,6 +1,6 @@
 package com.solvd.AviaCompany.utils.menu;
 
-import com.solvd.AviaCompany.utils.Main;
+import com.solvd.AviaCompany.Main;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Scanner;

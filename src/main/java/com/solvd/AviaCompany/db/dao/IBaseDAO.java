@@ -1,8 +1,8 @@
-package com.solvd.AviaCompany.db;
+package com.solvd.AviaCompany.db.dao;
 
 import java.util.List;
 
-public interface DAO<K extends Number, T> {
+public interface IBaseDAO<K extends Number, T> {
     public abstract boolean create(T entity);
     public abstract List<T> read();
     public abstract T update(T entity);

@@ -1,4 +1,4 @@
-package com.solvd.AviaCompany.utils;
+package com.solvd.AviaCompany;
 
 import com.solvd.AviaCompany.hierarchy.Flight;
 import com.solvd.AviaCompany.utils.menu.*;
