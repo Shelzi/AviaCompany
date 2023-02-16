@@ -1,6 +1,5 @@
 package com.solvd.AviaCompany.utils.menu;
 
-import com.solvd.AviaCompany.utils.Main;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,7 +7,7 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MenuService {
-    private final Logger LOGGER = LogManager.getLogger(Main.class);
+    private final Logger LOGGER = LogManager.getLogger(MenuService.class);
     private MenuOptions currentOption = MenuOptions.ALL;
     private GetDAO.AvailableOptions choice = null;
     private final CaseALL caseALL = new CaseALL();
