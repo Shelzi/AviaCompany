@@ -10,3 +10,7 @@ Contributors
 -  [Vlad Zhuravlev](https://www.linkedin.com/in/vlad-zhuravlev/)
  
  ![](plane.png)
+
+Algorithm
+--------------
+[Floyd–Warshall algorithm](https://en.wikipedia.org/wiki/Floyd–Warshall_algorithm)
