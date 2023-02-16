@@ -1,4 +1,4 @@
-package com.solvd.AviaCompany.sercive;
+package com.solvd.AviaCompany.service;
 
 import java.util.List;
 
