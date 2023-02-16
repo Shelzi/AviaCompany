@@ -9,4 +9,4 @@ Contributors
 -  [Natallia Trukhanovich](https://github.com/NataliaTrukhanovich)
 -  [Vlad Zhuravlev](https://www.linkedin.com/in/vlad-zhuravlev/)
  
- ![](image.png)
+ ![](plane.png)
