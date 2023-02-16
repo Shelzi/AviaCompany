@@ -2,8 +2,6 @@ package com.solvd.AviaCompany.hierarchy;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 public class Passenger {
 

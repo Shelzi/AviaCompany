@@ -1,14 +1,10 @@
 package com.solvd.AviaCompany.utils;
 
-import com.solvd.AviaCompany.hierarchy.Flight;
 import com.solvd.AviaCompany.utils.menu.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Scanner;
-import java.util.TimeZone;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main {
@@ -16,7 +12,7 @@ public class Main {
     private static MenuOptions currentOption = MenuOptions.ALL;
     private static final GetDAO.AvailableOptions choice = null;
 
-    public enum MenuOptions{
+    public enum MenuOptions {
         ALL,
         PRINT,
         ADD,
@@ -27,15 +23,15 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        try {
-            TimeZone timeZone = TimeZone.getTimeZone("America/Los_Angeles");
-            Flight flight = new Flight("Minsk", "Vilnus", 200, 500,
-                    new SimpleDateFormat("YYYY-MM-DD  hh:mm").parse("2023-02-10  12:00"), timeZone);
-            LOGGER.info(flight);
-        } catch (ParseException e) {
-            LOGGER.warn("INVALID DATE");
-        }
-
+//        try {
+//            TimeZone timeZone = TimeZone.getTimeZone("America/Los_Angeles");
+//            Flight flight = new Flight("Minsk", "Vilnus", 200, 500,
+//                    new SimpleDateFormat("YYYY-MM-DD  hh:mm").parse("2023-02-10  12:00"), timeZone);
+//            LOGGER.info(flight);
+//        } catch (ParseException e) {
+//            LOGGER.warn("INVALID DATE");
+//        }
+        new DataFactory().createData();
         Menu();
     }
 
