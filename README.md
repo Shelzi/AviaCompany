@@ -17,4 +17,4 @@ Algorithm
 
 **Complexity:**   $\Theta(|V|^3)$
 
-Where $V$ - amount of edges in graph
+Where $|V|$ - amount of edges in graph
