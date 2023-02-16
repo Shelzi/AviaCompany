@@ -7,15 +7,13 @@ import java.util.Scanner;
 
 public class CaseALL {
 
-    public static Main.MenuOptions all(Logger LOGGER, Scanner sc) {
-        Main.MenuOptions currentOption = Main.MenuOptions.ALL;
+    public MenuOptions all(Logger LOGGER, Scanner sc) {
+        MenuOptions currentOption = MenuOptions.ALL;
         LOGGER.info("""
                                         
                 (1)  * PRINT
-                (2)  * ADD
-                (3)  * UPDATE
-                (4)  * DELETE
-                (5)  * BOOK_FLIGHT
+                (2)  * BOOK_FLIGHT
+                
                 (0)  * EXIT
                 """);
         boolean validInt = false;
@@ -27,17 +25,17 @@ public class CaseALL {
             } catch (NumberFormatException e) {
                 validInt = false;
             }
-        } while (!validInt || c < 0 || c > 5);
+        } while (!validInt || c < 0 || c > 2);
 
         switch (c) {
-            case 1 -> currentOption = Main.MenuOptions.PRINT;
-            case 2 -> currentOption = Main.MenuOptions.ADD;
-            case 3 -> currentOption = Main.MenuOptions.UPDATE;
-            case 4 -> currentOption = Main.MenuOptions.DELETE;
-            case 5 -> currentOption = Main.MenuOptions.BOOK_FLIGHT;
+            case 1 -> currentOption = MenuOptions.PRINT;
+//            case 2 -> currentOption = MenuOptions.ADD;
+//            case 3 -> currentOption = MenuOptions.UPDATE;
+//            case 4 -> currentOption = MenuOptions.DELETE;
+            case 2 -> currentOption = MenuOptions.BOOK_FLIGHT;
 
-            case 0 -> currentOption = Main.MenuOptions.EXIT;
-            default -> currentOption = Main.MenuOptions.ALL;
+            case 0 -> currentOption = MenuOptions.EXIT;
+            default -> currentOption = MenuOptions.ALL;
         }
         return currentOption;
     }
