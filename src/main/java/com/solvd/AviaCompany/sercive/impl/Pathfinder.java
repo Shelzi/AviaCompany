@@ -1,47 +1,64 @@
 package com.solvd.AviaCompany.sercive.impl;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Pathfinder {
 
     private static final int INF = Integer.MAX_VALUE / 2;
+    private static final int OFFSET = 1;
 
-    private int[][] findPathsByFloydWarshall(int input[][]) {
-        int[][] result = input;
+    private static final Logger logger = LogManager.getLogger();
+
+    private Map<String, int[][]> findPathsByFloydWarshall(int[][] input) {
+        Map<String, int[][]> resultMap = new HashMap<>();
+        int[][] resultWeights = input;
+        int[][] resultPaths = fillDefaultPaths(input);
         for (int k = 0; k < input.length; k++)
             for (int j = 0; j < input.length; j++)
                 for (int i = 0; i < input.length; i++) {
-                    // If vertex k is on the shortest path from
-                    // i to j, then update the value of dist[i][j]
-                    if (result[i][k] + result[k][j] < result[i][j]) {
-                        result[i][j] = result[i][k] + result[k][j];
+                    if (resultWeights[i][k] + resultWeights[k][j] < resultWeights[i][j]) {
+                        resultWeights[i][j] = resultWeights[i][k] + resultWeights[k][j];
+                        resultPaths[i][j] = k + OFFSET;
                     }
                 }
-        return result;
+        resultMap.put("weight", resultWeights);
+        resultMap.put("path", resultPaths);
+        return resultMap;
+    }
+
+    private int[][] fillDefaultPaths(int[][] defPaths) {
+        int[][] resultPaths = new int[defPaths.length][defPaths.length];
+        for (int i = 0; i < defPaths.length; i++) {
+            for (int j = 0; j < defPaths.length; j++) {
+                resultPaths[i][j] = j + OFFSET;
+            }
+        }
+        return resultPaths;
     }
 
     public static void main(String[] args) {
-        // Assume an adjacency matrix representation
-        // Assume vertices are numbered 1,2,…,n
-        // The input is a n x n matrix (see README.md)
         int[][] testGraph = {
                 {0, 7, INF, INF, 3},
                 {INF, 0, INF, 2, INF},
                 {INF, 4, 0, 1, INF},
                 {-3, INF, INF, 0, INF},
-                {3, INF, 4, INF, 0}
+                {2, INF, 4, INF, 0}
         };
         Pathfinder pathfinder = new Pathfinder();
-        int[][] result = pathfinder.findPathsByFloydWarshall(testGraph);
-        printMatrix(result);
+        Map<String, int[][]> resultMap = pathfinder.findPathsByFloydWarshall(testGraph);
+        printMatrix(resultMap.get("weight"));
+        printMatrix(resultMap.get("path"));
     }
 
-    static void printMatrix(int input[][]) {
-        System.out.println("New Matrix: ");
+    public static void printMatrix(int input[][]) {
         for (int i = 0; i < input.length; ++i) {
             for (int j = 0; j < input.length; ++j) {
-                if (input[i][j] == input.length)
-                    System.out.print("I   \t");
-                else
-                    System.out.print(input[i][j] + "   \t");
+                System.out.print(input[i][j]+"\t");
             }
             System.out.println();
         }
