@@ -11,7 +11,7 @@ import java.sql.Statement;
 
 public class JDBCConnectionManager {
 
-    private static final Logger LOGGER = LogManager.getLogger(JDBCConnectionManager.class);
+    private static final Logger logger = LogManager.getLogger(JDBCConnectionManager.class);
 
     PropertiesManager propertiesManager;
 
@@ -25,9 +25,9 @@ public class JDBCConnectionManager {
                     propertiesManager.getProperty("USER"),
                     propertiesManager.getProperty("PASSWORD"));
         } catch (ClassNotFoundException e) {
-            LOGGER.warn("Couldn't find a driver");
+            logger.warn("Couldn't find a driver");
         } catch (SQLException e) {
-            LOGGER.warn("Wrong credentials");
+            logger.warn("Wrong credentials");
         }
         return null;
     }
@@ -37,7 +37,7 @@ public class JDBCConnectionManager {
             try {
                 con.close();
             } catch (SQLException e) {
-                LOGGER.warn("Couldn't close a connection");
+                logger.warn("Couldn't close a connection");
             }
         }
     }
@@ -47,7 +47,7 @@ public class JDBCConnectionManager {
             try {
                 stmt.close();
             } catch (SQLException e) {
-                LOGGER.warn("Couldn't end the statement");
+                logger.warn("Couldn't end the statement");
             }
         }
     }

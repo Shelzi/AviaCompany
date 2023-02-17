@@ -1,15 +1,16 @@
 package com.solvd.AviaCompany.utils.menu;
 
-import com.solvd.AviaCompany.Main;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Scanner;
 
-public class CaseALL {
+public class CaseAll {
 
-    public MenuOptions all(Logger LOGGER, Scanner sc) {
+    public MenuOptions
+
+    all(Logger logger, Scanner sc) {
         MenuOptions currentOption = MenuOptions.ALL;
-        LOGGER.info("""
+        logger.info("""
                                         
                 (1)  * PRINT
                 (2)  * BOOK_FLIGHT

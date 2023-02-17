@@ -14,7 +14,7 @@ import static com.solvd.AviaCompany.db.tablecolumns.CityColumn.*;
 
 public class CityDAOImpl extends JDBCConnectionManager implements ICityDAO {
 
-    private static final Logger LOGGER = LogManager.getLogger(CityDAOImpl.class);
+    private static final Logger logger = LogManager.getLogger(CityDAOImpl.class);
     private static final String GET_CITY_ID = "SELECT * FROM City WHERE id = ?";
     private static final String INSERT_CITY = "INSERT INTO City(name, country_id) VALUES(?, ?)";
     private static final String GET_ALL_CITIES = "SELECT * FROM City";
@@ -32,11 +32,11 @@ public class CityDAOImpl extends JDBCConnectionManager implements ICityDAO {
             preparedStatement.setInt(2, entity.getCountryID());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 0) {
-                LOGGER.warn("No rows were inserted");
+                logger.warn("No rows were inserted");
                 return false;
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement  / Invalid field");
+            logger.warn("Wrong statement  / Invalid field");
         } finally {
             close(preparedStatement);
             close(connection);
@@ -61,7 +61,7 @@ public class CityDAOImpl extends JDBCConnectionManager implements ICityDAO {
                 cityList.add(city);
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement / Invalid field");
+            logger.warn("Wrong statement / Invalid field");
         } finally {
             close(statement);
             close(connection);
@@ -81,11 +81,11 @@ public class CityDAOImpl extends JDBCConnectionManager implements ICityDAO {
             preparedStatement.setInt(3, entity.getId());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 0){
-                LOGGER.warn("No rows were inserted");
+                logger.warn("No rows were inserted");
                 return entity;
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement  / Invalid field");
+            logger.warn("Wrong statement  / Invalid field");
         } finally {
             close(preparedStatement);
             close(connection);
@@ -111,7 +111,7 @@ public class CityDAOImpl extends JDBCConnectionManager implements ICityDAO {
                 return city;
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement  / Invalid field");
+            logger.warn("Wrong statement  / Invalid field");
         } finally {
             close(preparedStatement);
             close(connection);

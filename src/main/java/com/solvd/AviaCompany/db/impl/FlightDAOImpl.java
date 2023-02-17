@@ -15,7 +15,7 @@ import static com.solvd.AviaCompany.db.tablecolumns.FlightColumn.*;
 
 public class FlightDAOImpl extends JDBCConnectionManager implements IFlightDAO {
 
-    private static final Logger LOGGER = LogManager.getLogger(FlightDAOImpl.class);
+    private static final Logger logger = LogManager.getLogger(FlightDAOImpl.class);
 
     private static final String GET_ALL_FLIGHTS = "SELECT * FROM Flights";
     private static final String INSERT_FLIGHT = "INSERT INTO Flights(dep_city_id," +
@@ -34,11 +34,11 @@ public class FlightDAOImpl extends JDBCConnectionManager implements IFlightDAO {
             preparedStatement.setInt(4, entity.getDistance());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 0) {
-                LOGGER.warn("No rows were inserted");
+                logger.warn("No rows were inserted");
                 return false;
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement  / Invalid field");
+            logger.warn("Wrong statement  / Invalid field");
         } finally {
             close(preparedStatement);
             close(connection);
@@ -68,7 +68,7 @@ public class FlightDAOImpl extends JDBCConnectionManager implements IFlightDAO {
                 flightList.add(flight);
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement / Invalid field");
+            logger.warn("Wrong statement / Invalid field");
         } finally {
             close(statement);
             close(connection);

@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Flight {
-
     private int id;
     private City departure;
     private City destination;
@@ -19,8 +18,8 @@ public class Flight {
     @Override
     public String toString() {
         return "Flight{\n" +
-                "        departure = '" + departure + "\'\n" +
-                "        destination = '" + destination + "\'\n" +
+                "        departure = '" + departure + "'\n" +
+                "        destination = '" + destination + "'\n" +
                 "        cost = " + cost + "$\n" +
                 "        distance = " + distance + " km\n";
 

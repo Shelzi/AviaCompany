@@ -5,15 +5,15 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Scanner;
 
-public class CasePRINT {
+public class CasePrint {
 
-    public MenuOptions print(Logger LOGGER, Scanner sc, GetDAO.AvailableOptions choice, GetDAO getDAO) {
+    public MenuOptions print(Logger logger, Scanner sc, GetDao.AvailableOptions choice, GetDao getDAO) {
          MenuOptions currentOption =  MenuOptions.ALL;
 
         IBaseDAO dao = getDAO.getDAO(sc);
         choice = getDAO.getChoice();
         if (dao != null) {
-            LOGGER.info("""
+            logger.info("""
                                 
                     (1)  * PRINT ALL
                     (2)  * PRINT BY ID
@@ -32,12 +32,12 @@ public class CasePRINT {
             } while (!validInt || k < 0 || k > 2);
             switch (k) {
                 case 1 -> {
-                    LOGGER.info(dao.read());
+                    logger.info(dao.read());
                 }
                 case 2 -> {
-                    LOGGER.info(" ENTER ID:");
+                    logger.info(" ENTER ID:");
                     k = sc.nextInt();
-                    LOGGER.info(dao.read(k));
+                    logger.info(dao.read(k));
                 }
                 default -> currentOption =  MenuOptions.PRINT;
             }

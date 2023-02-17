@@ -14,7 +14,7 @@ import static com.solvd.AviaCompany.db.tablecolumns.CountryColumn.*;
 
 public class CountryDAOImpl extends JDBCConnectionManager implements ICountryDAO {
 
-    private static final Logger LOGGER = LogManager.getLogger(CountryDAOImpl.class);
+    private static final Logger logger = LogManager.getLogger(CountryDAOImpl.class);
     private static final String GET_COUNTRY_ID = "SELECT * FROM Country WHERE id = ?";
     private static final String INSERT_COUNTRY = "INSERT INTO Country(name) VALUES(?)";
     private static final String GET_ALL_COUNTRIES = "SELECT * FROM Country";
@@ -30,11 +30,11 @@ public class CountryDAOImpl extends JDBCConnectionManager implements ICountryDAO
             preparedStatement.setString(1, entity.getName());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 0) {
-                LOGGER.warn("No rows were inserted");
+                logger.warn("No rows were inserted");
                 return false;
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement  / Invalid field");
+            logger.warn("Wrong statement  / Invalid field");
         } finally {
             close(preparedStatement);
             close(connection);
@@ -58,7 +58,7 @@ public class CountryDAOImpl extends JDBCConnectionManager implements ICountryDAO
                 countryList.add(country);
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement / Invalid field");
+            logger.warn("Wrong statement / Invalid field");
         } finally {
             close(statement);
             close(connection);
@@ -77,11 +77,11 @@ public class CountryDAOImpl extends JDBCConnectionManager implements ICountryDAO
             preparedStatement.setInt(2, entity.getId());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 0){
-                LOGGER.warn("No rows were inserted");
+                logger.warn("No rows were inserted");
                 return entity;
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement  / Invalid field");
+            logger.warn("Wrong statement  / Invalid field");
         } finally {
             close(preparedStatement);
             close(connection);
@@ -106,7 +106,7 @@ public class CountryDAOImpl extends JDBCConnectionManager implements ICountryDAO
                 return country;
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement  / Invalid field");
+            logger.warn("Wrong statement  / Invalid field");
         } finally {
             close(preparedStatement);
             close(connection);

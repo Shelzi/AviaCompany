@@ -9,35 +9,24 @@ import java.util.List;
 import java.util.Optional;
 
 public class CityService {
-    private List<City> cities;
-
-    {
-        cities = new CityDAOImpl().read();
-        cities.sort(new Comparator<City>() {
-            @Override
-            public int compare(City o1, City o2) {
-                int res;
-                if (o1.getId() == o2.getId())
-                    res = 0;
-                else if (o1.getId() < o2.getId())
-                    res = 1;
-                else
-                    res = -1;
-                return res;
-            }
-        });
-    }
 
     public List<City> getCities() {
+        List<City> cities = new CityDAOImpl().read();
+        cities.sort((o1, o2) -> Integer.compare(o2.getId(), o1.getId()));
         return cities;
     }
 
     public Optional<City> getCityById(int id){
-        return cities.stream().filter((x) -> x.getId() == id).findAny();
+        return new CityDAOImpl().read().stream()
+                .filter(x -> x.getId() == id)
+                .findAny();
     }
 
     public Optional<City> getCityByName(String name){
-        return cities.stream().filter((x) -> x.getName().equals(name)).findAny();
+
+        return new CityDAOImpl().read().stream()
+                .filter(x -> x.getName().equals(name))
+                .findAny();
     }
 
     public List<City> mapIdListToCity(List<Integer> list){
