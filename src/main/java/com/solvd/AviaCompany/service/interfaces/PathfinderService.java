@@ -1,4 +1,4 @@
-package com.solvd.AviaCompany.service;
+package com.solvd.AviaCompany.service.interfaces;
 
 import java.util.List;
 

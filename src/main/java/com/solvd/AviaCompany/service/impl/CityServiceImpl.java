@@ -1,32 +1,35 @@
 package com.solvd.AviaCompany.service.impl;
 
+import com.solvd.AviaCompany.db.dao.ICityDAO;
 import com.solvd.AviaCompany.db.impl.CityDAOImpl;
 import com.solvd.AviaCompany.hierarchy.City;
+import com.solvd.AviaCompany.service.interfaces.CityService;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-public class CityService {
+public class CityServiceImpl implements CityService {
+
+    private ICityDAO iCityDAO;
+
+    public CityServiceImpl() {
+        this.iCityDAO = new CityDAOImpl();
+    }
 
     public List<City> getCities() {
-        List<City> cities = new CityDAOImpl().read();
-        cities.sort((o1, o2) -> Integer.compare(o2.getId(), o1.getId()));
-        return cities;
+        List<City> cityList = iCityDAO.read();
+        cityList.sort(Comparator.comparingInt(City::getId));
+        return cityList;
     }
 
     public Optional<City> getCityById(int id){
-        return new CityDAOImpl().read().stream()
-                .filter(x -> x.getId() == id)
-                .findAny();
+        return Optional.ofNullable(iCityDAO.read(id));
     }
 
     public Optional<City> getCityByName(String name){
-
-        return new CityDAOImpl().read().stream()
-                .filter(x -> x.getName().equals(name))
-                .findAny();
+        return Optional.ofNullable(iCityDAO.getCityByName(name));
     }
 
     public List<City> mapIdListToCity(List<Integer> list){

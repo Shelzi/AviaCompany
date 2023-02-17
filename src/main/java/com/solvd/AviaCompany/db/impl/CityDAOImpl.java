@@ -19,6 +19,7 @@ public class CityDAOImpl extends JDBCConnectionManager implements ICityDAO {
     private static final String INSERT_CITY = "INSERT INTO City(name, country_id) VALUES(?, ?)";
     private static final String GET_ALL_CITIES = "SELECT * FROM City";
     private static final String UPDATE_CITY = "UPDATE City SET name=?, country_id=? WHERE id=?";
+    private static final String GET_CITY_NAME = "SELECT * FROM City WHERE name = ?";
 
 
     @Override
@@ -82,7 +83,7 @@ public class CityDAOImpl extends JDBCConnectionManager implements ICityDAO {
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 0){
                 logger.warn("No rows were inserted");
-                return entity;
+                return null;
             }
         } catch (SQLException e) {
             logger.warn("Wrong statement  / Invalid field");
@@ -127,5 +128,31 @@ public class CityDAOImpl extends JDBCConnectionManager implements ICityDAO {
     @Override
     public boolean delete(City entity) {
         return false;
+    }
+
+    @Override
+    public City getCityByName(String name) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(GET_CITY_NAME);
+            preparedStatement.setString(1, name);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                City city = new City();
+                city.setId(resultSet.getInt(ID.getColumn()));
+                city.setName(resultSet.getString(NAME.getColumn()));
+                city.setCountryID(resultSet.getInt(COUNTRY.getColumn()));
+                return city;
+            }
+        } catch (SQLException e) {
+            logger.warn("Wrong statement  / Invalid field");
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return null;
     }
 }

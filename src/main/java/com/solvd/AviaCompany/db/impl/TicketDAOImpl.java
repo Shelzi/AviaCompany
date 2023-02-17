@@ -1,7 +1,6 @@
 package com.solvd.AviaCompany.db.impl;
 
 import com.solvd.AviaCompany.db.dao.ITicketDAO;
-import com.solvd.AviaCompany.hierarchy.City;
 import com.solvd.AviaCompany.hierarchy.Flight;
 import com.solvd.AviaCompany.hierarchy.Passenger;
 import com.solvd.AviaCompany.hierarchy.Ticket;

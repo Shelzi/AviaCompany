@@ -19,6 +19,7 @@ public class CountryDAOImpl extends JDBCConnectionManager implements ICountryDAO
     private static final String INSERT_COUNTRY = "INSERT INTO Country(name) VALUES(?)";
     private static final String GET_ALL_COUNTRIES = "SELECT * FROM Country";
     private static final String UPDATE_COUNTRY = "UPDATE Country SET name=? WHERE id=?";
+    private static final String GET_COUNTRY_NAME = "SELECT * FROM Country WHERE name = ?";
 
     @Override
     public boolean create(Country entity) {
@@ -78,7 +79,7 @@ public class CountryDAOImpl extends JDBCConnectionManager implements ICountryDAO
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 0){
                 logger.warn("No rows were inserted");
-                return entity;
+                return null;
             }
         } catch (SQLException e) {
             logger.warn("Wrong statement  / Invalid field");
@@ -122,5 +123,30 @@ public class CountryDAOImpl extends JDBCConnectionManager implements ICountryDAO
     @Override
     public boolean delete(Country entity) {
         return false;
+    }
+
+    @Override
+    public Country getCountryByName(String name) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(GET_COUNTRY_NAME);
+            preparedStatement.setString(1, name);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                Country country = new Country();
+                country.setId(resultSet.getInt(ID.getColumn()));
+                country.setName(resultSet.getString(NAME.getColumn()));
+                return country;
+            }
+        } catch (SQLException e) {
+            logger.warn("Wrong statement  / Invalid field");
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return null;
     }
 }
