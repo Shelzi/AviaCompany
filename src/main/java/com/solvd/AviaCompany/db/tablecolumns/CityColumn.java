@@ -4,7 +4,7 @@ public enum CityColumn {
 
     ID("id"),
     NAME("name"),
-    COUNTRY("countryID");
+    COUNTRY("country_id");
 
     private String column;
 

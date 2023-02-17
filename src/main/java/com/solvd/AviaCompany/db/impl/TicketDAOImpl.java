@@ -1,7 +1,6 @@
 package com.solvd.AviaCompany.db.impl;
 
 import com.solvd.AviaCompany.db.dao.ITicketDAO;
-import com.solvd.AviaCompany.hierarchy.City;
 import com.solvd.AviaCompany.hierarchy.Flight;
 import com.solvd.AviaCompany.hierarchy.Passenger;
 import com.solvd.AviaCompany.hierarchy.Ticket;
@@ -17,7 +16,7 @@ import static com.solvd.AviaCompany.db.tablecolumns.TicketColumn.*;
 
 public class TicketDAOImpl extends JDBCConnectionManager implements ITicketDAO {
 
-    private static final Logger LOGGER = LogManager.getLogger(TicketDAOImpl.class);
+    private static final Logger logger = LogManager.getLogger(TicketDAOImpl.class);
     private static final String INSERT_TICKET = "INSERT INTO Tickets(passengers_id, flights_id) VALUES(?, ?)";
     private static final String GET_ALL_TICKETS = "SELECT * FROM Tickets";
 
@@ -32,11 +31,11 @@ public class TicketDAOImpl extends JDBCConnectionManager implements ITicketDAO {
             preparedStatement.setInt(2, entity.getFlight().getId());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 0) {
-                LOGGER.warn("No rows were inserted");
+                logger.warn("No rows were inserted");
                 return false;
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement  / Invalid field");
+            logger.warn("Wrong statement  / Invalid field");
         } finally {
             close(preparedStatement);
             close(connection);
@@ -63,7 +62,7 @@ public class TicketDAOImpl extends JDBCConnectionManager implements ITicketDAO {
                 ticketList.add(ticket);
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement / Invalid field");
+            logger.warn("Wrong statement / Invalid field");
         } finally {
             close(statement);
             close(connection);

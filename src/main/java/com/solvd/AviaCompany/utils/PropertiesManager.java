@@ -10,11 +10,11 @@ import java.util.Properties;
 public class PropertiesManager {
     private String pathToProp;
     private Properties prop;
-    private static final Logger LOGGER = LogManager.getLogger(PropertiesManager.class);
-    private String defaultPath = "/src/main/resources/dbcreds.properties";
+    private static final Logger logger = LogManager.getLogger(PropertiesManager.class);
+    private final String DEFAULT_PATH = "/src/main/resources/dbcreds.properties";
 
     public PropertiesManager() {
-        pathToProp = System.getProperty("user.dir") + defaultPath;
+        pathToProp = System.getProperty("user.dir") + DEFAULT_PATH;
     }
 
     public PropertiesManager(String pathToProp) {
@@ -26,7 +26,7 @@ public class PropertiesManager {
         try {
             prop.load(new FileInputStream(pathToProp));
         } catch (IOException e) {
-            LOGGER.warn("Couldn't find a property file");
+            logger.warn("Couldn't find a property file");
         }
     }
 
