@@ -1,5 +1,6 @@
 package com.solvd.AviaCompany;
 
+import com.solvd.AviaCompany.utils.DataFactory;
 import com.solvd.AviaCompany.hierarchy.City;
 import com.solvd.AviaCompany.hierarchy.Flight;
 import com.solvd.AviaCompany.service.impl.FlightGraphService;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
+        new DataFactory().createData();
         MenuService menuService = new MenuService();
         //menuService.menu();
         ArrayList<Flight> flights = new ArrayList<>();
