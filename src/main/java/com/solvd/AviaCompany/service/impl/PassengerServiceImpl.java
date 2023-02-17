@@ -1,10 +1,7 @@
 package com.solvd.AviaCompany.service.impl;
 
-import com.solvd.AviaCompany.db.dao.ICountryDAO;
 import com.solvd.AviaCompany.db.dao.IPassengerDAO;
-import com.solvd.AviaCompany.db.impl.CountryDAOImpl;
 import com.solvd.AviaCompany.db.impl.PassengerDAOImpl;
-import com.solvd.AviaCompany.hierarchy.Country;
 import com.solvd.AviaCompany.hierarchy.Passenger;
 import com.solvd.AviaCompany.service.interfaces.PassengerService;
 import org.apache.logging.log4j.LogManager;

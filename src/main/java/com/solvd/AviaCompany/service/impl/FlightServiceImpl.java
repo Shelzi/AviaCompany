@@ -2,7 +2,6 @@ package com.solvd.AviaCompany.service.impl;
 
 import com.solvd.AviaCompany.db.dao.IFlightDAO;
 import com.solvd.AviaCompany.db.impl.FlightDAOImpl;
-import com.solvd.AviaCompany.hierarchy.City;
 import com.solvd.AviaCompany.hierarchy.Flight;
 import com.solvd.AviaCompany.service.interfaces.FlightService;
 
