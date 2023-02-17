@@ -1,265 +1,102 @@
-2023-02-16 11:28:28,044 INFO c.s.A.u.m.CaseALL [main] 
+2023-02-16 14:14:39,570 INFO c.s.A.u.m.CaseALL [main] 
+                (1)  * PRINT
+//                (2)  * ADD
+//                (3)  * UPDATE
+//                (4)  * DELETE
+                (5)  * BOOK_FLIGHT
+                (0)  * EXIT
+
+2023-02-16 14:15:22,364 INFO c.s.A.u.m.CaseALL [main] 
 (1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
+(2)  * BOOK_FLIGHT
+
 (0)  * EXIT
 
-2023-02-16 11:29:09,388 INFO c.s.A.u.m.CaseALL [main] 
+2023-02-16 14:15:25,418 INFO c.s.A.u.m.GetDAO [main] 
+(1)  * AIRPORTS
+(2)  * FLIGHTS
+(3)  * PILOTS
+(4)  * PLANES
+(5)  * TICKETS
+
+(0)  * BACK
+
+2023-02-16 14:15:27,137 INFO c.s.A.u.m.CaseALL [main] 
 (1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
+(2)  * BOOK_FLIGHT
+
 (0)  * EXIT
 
-2023-02-16 11:32:34,361 INFO c.s.A.u.m.CaseALL [main] 
+2023-02-16 14:15:29,000 INFO c.s.A.u.m.GetDAO [main] 
+(1)  * AIRPORTS
+(2)  * FLIGHTS
+(3)  * PILOTS
+(4)  * PLANES
+(5)  * TICKETS
+
+(0)  * BACK
+
+2023-02-16 14:15:29,880 INFO c.s.A.u.m.CaseALL [main] 
 (1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
+(2)  * BOOK_FLIGHT
+
 (0)  * EXIT
 
-2023-02-16 11:33:06,445 INFO c.s.A.u.m.CaseEXIT [main] 
+2023-02-16 14:15:32,169 INFO c.s.A.u.m.CaseBOOK_FLIGHT [main]  FROM:
+2023-02-16 14:16:35,965 INFO c.s.A.u.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * BOOK_FLIGHT
+
+(0)  * EXIT
+
+2023-02-16 14:16:38,855 INFO c.s.A.u.m.CaseBOOK_FLIGHT [main]  FROM:
+2023-02-16 14:16:40,830 INFO c.s.A.u.m.CaseBOOK_FLIGHT [main]  TO:
+2023-02-16 14:17:20,381 INFO c.s.A.u.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * BOOK_FLIGHT
+
+(0)  * EXIT
+
+2023-02-16 14:17:25,116 INFO c.s.A.u.m.CaseBOOK_FLIGHT [main]  FROM:
+2023-02-16 14:17:27,012 INFO c.s.A.u.m.CaseBOOK_FLIGHT [main]  TO:
+2023-02-16 14:17:31,957 INFO c.s.A.u.m.CaseALL [main] 
+(1)  * PRINT
+(2)  * BOOK_FLIGHT
+
+(0)  * EXIT
+
+2023-02-16 14:17:35,387 INFO c.s.A.u.m.CaseEXIT [main] 
      * ARE YOU SURE (y/n):
-2023-02-16 11:33:10,651 INFO c.s.A.u.m.CaseEXIT [main]      * BYE...
-2023-02-16 11:35:15,895 INFO c.s.A.u.m.CaseALL [main] 
+2023-02-16 14:17:37,219 INFO c.s.A.u.m.CaseEXIT [main]      * BYE...
+2023-02-16 14:24:28,990 INFO c.s.A.u.m.CaseALL [main] 
 (1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
+(2)  * BOOK_FLIGHT
+
 (0)  * EXIT
 
-2023-02-16 11:35:45,350 INFO c.s.A.u.m.CaseALL [main] 
+2023-02-16 14:24:32,680 INFO c.s.A.u.m.GetDAO [main] 
+(1)  * AIRPORTS
+(2)  * FLIGHTS
+(3)  * PILOTS
+(4)  * PLANES
+(5)  * TICKETS
+
+(0)  * BACK
+
+2023-02-16 14:24:33,647 INFO c.s.A.u.m.CaseALL [main] 
 (1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
+(2)  * BOOK_FLIGHT
+
 (0)  * EXIT
 
-2023-02-16 11:36:20,626 INFO c.s.A.u.m.CaseALL [main] 
+2023-02-16 14:24:35,024 INFO c.s.A.u.m.CaseBOOK_FLIGHT [main]  FROM:
+2023-02-16 14:24:37,504 INFO c.s.A.u.m.CaseBOOK_FLIGHT [main]  TO:
+2023-02-16 14:24:39,200 INFO c.s.A.u.m.CaseALL [main] 
 (1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
+(2)  * BOOK_FLIGHT
+
 (0)  * EXIT
 
-2023-02-16 11:37:53,067 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 11:38:08,355 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 11:38:53,550 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 11:40:13,279 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 11:41:06,955 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 11:42:23,786 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 11:44:01,995 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 11:53:43,368 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 11:54:37,808 INFO c.s.A.u.m.CaseEXIT [main] 
+2023-02-16 14:24:41,184 INFO c.s.A.u.m.CaseEXIT [main] 
      * ARE YOU SURE (y/n):
-2023-02-16 11:54:38,463 INFO c.s.A.u.m.CaseEXIT [main]      * BYE...
-2023-02-16 12:01:01,681 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 12:04:20,706 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 12:05:10,413 INFO c.s.A.u.m.CaseEXIT [main] 
-     * ARE YOU SURE (y/n):
-2023-02-16 12:05:13,065 INFO c.s.A.u.m.CaseEXIT [main]      * BYE...
-2023-02-16 12:05:20,013 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 12:05:41,597 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 12:06:09,475 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 12:07:13,372 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 12:07:47,034 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 12:17:47,252 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 12:31:54,013 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 12:41:10,738 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 19:15:06,018 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 19:16:47,949 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 20:12:40,811 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 21:12:04,072 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 21:15:24,231 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 21:16:24,573 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 21:20:38,203 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
-2023-02-16 21:25:41,150 INFO c.s.A.u.m.CaseALL [main] 
-(1)  * PRINT
-(2)  * ADD
-(3)  * UPDATE
-(4)  * DELETE
-(5)  * BOOK_FLIGHT
-(0)  * EXIT
-
+2023-02-16 14:24:42,480 INFO c.s.A.u.m.CaseEXIT [main]      * BYE...

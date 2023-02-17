@@ -48,7 +48,7 @@ public class ScannerGetter {
         String res;
         do {
             res = sc.nextLine().trim();
-        } while (res.length() != 0);
+        } while (res.length() == 0);
         return res;
     }
 
