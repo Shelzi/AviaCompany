@@ -1,6 +1,11 @@
 package com.solvd.AviaCompany.utils.menu;
 
+import com.solvd.AviaCompany.hierarchy.City;
 import com.solvd.AviaCompany.hierarchy.Flight;
+import com.solvd.AviaCompany.service.impl.CityService;
+import com.solvd.AviaCompany.service.impl.FlightGraphService;
+import com.solvd.AviaCompany.service.impl.FlightServiceImpl;
+import com.solvd.AviaCompany.service.impl.FloydWarshallPathfinderServiceImpl;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
@@ -8,17 +13,32 @@ import java.util.Optional;
 import java.util.Scanner;
 
 public class CaseBOOK_FLIGHT {
-    private List<Flight> flightList;
-
+    private final FlightServiceImpl flightService;
+    private final CityService cityService;
     {
-        //flightList = FlightDAO.getAll();
+        flightService = new FlightServiceImpl();
+        cityService = new CityService();
     }
 
-    private Optional<Flight> FloydShortest(String from, String to) {
+    private Optional<Flight> FloydShortest(Logger LOGGER, String from, String to,boolean distance) {
+        int[][] graph = new FlightGraphService().getMatrixFromList(flightService.getFlights());
+        Optional<City> optionalFrom = cityService.getCityByName(from);
+        if(optionalFrom.isEmpty()){
+            LOGGER.info(" Sorry we dont fly from " + from);
+            return Optional.ofNullable(null);
+        }
+        Optional<City> optionalTo = cityService.getCityByName(to);
+        if(optionalTo.isEmpty()){
+            LOGGER.info(" Sorry we dont fly to " + to);
+            return Optional.ofNullable(null);
+        }
+        int fromId = optionalFrom.get().getId(), toId = optionalTo.get().getId();
+        List<Integer> ids = new FloydWarshallPathfinderServiceImpl().findPath(graph, fromId, toId);
+        List<City> cityList = cityService.mapIdListToCity(ids);
         return Optional.ofNullable(null);
     }
 
-    private Optional<Flight> FloydCheapest(String from, String to) {
+    private Optional<Flight> FloydCheapest(Logger LOGGER, String from, String to) {
         return Optional.ofNullable(null);
     }
 
@@ -38,14 +58,14 @@ public class CaseBOOK_FLIGHT {
             LOGGER.info(" TO:");
             to = ScannerGetter.getString(sc);
 
-            Optional<Flight> shortest = FloydShortest(from, to);
+            Optional<Flight> shortest = FloydShortest(LOGGER, from, to, true);
             if (shortest.isEmpty()) {
-                LOGGER.info(" WE ARE SORRY, but there is no available route " + from + " to " + to);
+                LOGGER.info(" WE ARE SORRY, but there is no available route from" + from + " to " + to);
                 currentOption = MenuOptions.ALL;
                 return currentOption;
             }
 
-            Optional<Flight> cheapest = FloydCheapest(from, to);
+            Optional<Flight> cheapest = FloydCheapest(LOGGER, from, to);
             if (cheapest.equals(shortest)) {
                 LOGGER.info(" We have only one available route for you: " + shortest.toString());
                 LOGGER.info(""" 
