@@ -1,6 +1,5 @@
 package com.solvd.AviaCompany.service.impl;
 
-import com.solvd.AviaCompany.service.PathfinderService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

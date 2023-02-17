@@ -2,7 +2,7 @@ package com.solvd.AviaCompany.utils.menu;
 
 import com.solvd.AviaCompany.hierarchy.City;
 import com.solvd.AviaCompany.hierarchy.Flight;
-import com.solvd.AviaCompany.service.impl.CityService;
+import com.solvd.AviaCompany.service.impl.CityServiceImpl;
 import com.solvd.AviaCompany.service.impl.FlightGraphService;
 import com.solvd.AviaCompany.service.impl.FlightServiceImpl;
 import com.solvd.AviaCompany.service.impl.FloydWarshallPathfinderServiceImpl;
@@ -14,27 +14,27 @@ import java.util.Scanner;
 
 public class CaseBOOK_FLIGHT {
     private final FlightServiceImpl flightService;
-    private final CityService cityService;
+    private final CityServiceImpl cityServiceImpl;
     {
         flightService = new FlightServiceImpl();
-        cityService = new CityService();
+        cityServiceImpl = new CityServiceImpl();
     }
 
     private Optional<Flight> FloydShortest(Logger LOGGER, String from, String to,boolean distance) {
         int[][] graph = new FlightGraphService().getMatrixFromList(flightService.getFlights());
-        Optional<City> optionalFrom = cityService.getCityByName(from);
+        Optional<City> optionalFrom = cityServiceImpl.getCityByName(from);
         if(optionalFrom.isEmpty()){
             LOGGER.info(" Sorry we dont fly from " + from);
             return Optional.ofNullable(null);
         }
-        Optional<City> optionalTo = cityService.getCityByName(to);
+        Optional<City> optionalTo = cityServiceImpl.getCityByName(to);
         if(optionalTo.isEmpty()){
             LOGGER.info(" Sorry we dont fly to " + to);
             return Optional.ofNullable(null);
         }
         int fromId = optionalFrom.get().getId(), toId = optionalTo.get().getId();
         List<Integer> ids = new FloydWarshallPathfinderServiceImpl().findPath(graph, fromId, toId);
-        List<City> cityList = cityService.mapIdListToCity(ids);
+        List<City> cityList = cityServiceImpl.mapIdListToCity(ids);
         return Optional.ofNullable(null);
     }
 

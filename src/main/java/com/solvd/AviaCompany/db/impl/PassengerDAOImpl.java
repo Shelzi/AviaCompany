@@ -19,6 +19,8 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
     private static final String INSERT_PASSENGER = "INSERT INTO Passengers(first_name, last_name) VALUES(?,?)";
     private static final String GET_ALL_PASSENGERS = "SELECT * FROM Passengers";
     private static final String UPDATE_PASSENGER = "UPDATE Passengers SET first_name=?, last_name=? WHERE id=?";
+    private static final String GET_PASSENGER_BY_FNAME_LNAME = "SELECT * FROM Passengers " +
+            "WHERE first_name = ? AND last_name = ?";
 
     @Override
     public boolean create(Passenger entity) {
@@ -79,9 +81,9 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
             preparedStatement.setString(2, entity.getLname());
             preparedStatement.setInt(3, entity.getId());
             int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected == 0){
+            if (rowsAffected == 0) {
                 logger.warn("No rows were inserted");
-                return entity;
+                return null;
             }
         } catch (SQLException e) {
             logger.warn("Wrong statement  / Invalid field");
@@ -126,5 +128,32 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
     @Override
     public boolean delete(Passenger entity) {
         return false;
+    }
+
+    @Override
+    public Passenger getPassengerByFirstAndLastName(String firstName, String lastName) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(GET_PASSENGER_BY_FNAME_LNAME);
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                Passenger passenger = new Passenger();
+                passenger.setId(resultSet.getInt(ID.getColumn()));
+                passenger.setFname(resultSet.getString(FIRST_NAME.getColumn()));
+                passenger.setLname(resultSet.getString(LAST_NAME.getColumn()));
+                return passenger;
+            }
+        } catch (SQLException e) {
+            logger.warn("Wrong statement  / Invalid field");
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return null;
     }
 }
