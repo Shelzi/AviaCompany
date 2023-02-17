@@ -2,7 +2,7 @@ package com.solvd.AviaCompany.utils.menu;
 
 import com.solvd.AviaCompany.hierarchy.City;
 import com.solvd.AviaCompany.hierarchy.Flight;
-import com.solvd.AviaCompany.service.impl.CityService;
+import com.solvd.AviaCompany.service.impl.CityServiceImpl;
 import com.solvd.AviaCompany.service.impl.FlightGraphService;
 import com.solvd.AviaCompany.service.impl.FlightServiceImpl;
 import com.solvd.AviaCompany.service.impl.FloydWarshallPathfinderServiceImpl;
@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class CaseBookFlight {
     private final FlightServiceImpl flightService = new FlightServiceImpl();
-    private final CityService cityService = new CityService();
+    private final CityServiceImpl cityService = new CityServiceImpl();
 
     private Optional<Flight> FloydShortest(Logger logger, String from, String to,boolean distance) {
         int[][] graph = new FlightGraphService().getMatrixFromList(flightService.getFlights());

@@ -29,8 +29,8 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(INSERT_PASSENGER);
-            preparedStatement.setString(1, entity.getFirstName());
-            preparedStatement.setString(2, entity.getLastName());
+            preparedStatement.setString(1, entity.getfName());
+            preparedStatement.setString(2, entity.getlName());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 0) {
                 logger.warn("No rows were inserted");
@@ -57,8 +57,8 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
             while (resultSet.next()) {
                 Passenger passenger = new Passenger();
                 passenger.setId(resultSet.getInt(ID.getColumn()));
-                passenger.setFirstName(resultSet.getString(FIRST_NAME.getColumn()));
-                passenger.setLastName(resultSet.getString(LAST_NAME.getColumn()));
+                passenger.setfName(resultSet.getString(FIRST_NAME.getColumn()));
+                passenger.setlName(resultSet.getString(LAST_NAME.getColumn()));
                 passengerList.add(passenger);
             }
         } catch (SQLException e) {
@@ -77,8 +77,8 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(UPDATE_PASSENGER);
-            preparedStatement.setString(1, entity.getFirstName());
-            preparedStatement.setString(2, entity.getLastName());
+            preparedStatement.setString(1, entity.getfName());
+            preparedStatement.setString(2, entity.getlName());
             preparedStatement.setInt(3, entity.getId());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 0) {
@@ -107,8 +107,8 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
             if (resultSet.next()) {
                 Passenger passenger = new Passenger();
                 passenger.setId(resultSet.getInt(ID.getColumn()));
-                passenger.setFirstName(resultSet.getString(FIRST_NAME.getColumn()));
-                passenger.setLastName(resultSet.getString(LAST_NAME.getColumn()));
+                passenger.setfName(resultSet.getString(FIRST_NAME.getColumn()));
+                passenger.setfName(resultSet.getString(LAST_NAME.getColumn()));
                 return passenger;
             }
         } catch (SQLException e) {
@@ -144,8 +144,8 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
             if (resultSet.next()) {
                 Passenger passenger = new Passenger();
                 passenger.setId(resultSet.getInt(ID.getColumn()));
-                passenger.setFname(resultSet.getString(FIRST_NAME.getColumn()));
-                passenger.setLname(resultSet.getString(LAST_NAME.getColumn()));
+                passenger.setfName(resultSet.getString(FIRST_NAME.getColumn()));
+                passenger.setlName(resultSet.getString(LAST_NAME.getColumn()));
                 return passenger;
             }
         } catch (SQLException e) {

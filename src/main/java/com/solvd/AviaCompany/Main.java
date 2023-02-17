@@ -1,5 +1,8 @@
 package com.solvd.AviaCompany;
 
+import com.solvd.AviaCompany.service.impl.FloydPairs;
+import com.solvd.AviaCompany.service.impl.IntIntPair;
+import com.solvd.AviaCompany.service.impl.PairGraphBuilder;
 import com.solvd.AviaCompany.utils.DataFactory;
 import com.solvd.AviaCompany.hierarchy.City;
 import com.solvd.AviaCompany.hierarchy.Flight;
@@ -10,7 +13,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        new DataFactory().createData();
+        //new DataFactory().createData();
         MenuService menuService = new MenuService();
         //menuService.menu();
         ArrayList<Flight> flights = new ArrayList<>();
@@ -22,14 +25,8 @@ public class Main {
         Flight f3 = new Flight(3, Mogilev, Minsk, 300, 500);
         flights.add(f1);
         flights.add(f2);
-        flights.add(f3);
-        int[][] mas = new FlightGraphService().getMatrixFromList(flights);
-        for(int[] i : mas){
-            for(int j : i){
-                System.out.print(j + " ");
-            }
-            System.out.println();
-        }
+        IntIntPair[][] mas = new PairGraphBuilder().getMatrixFromList(flights);
+        new FloydPairs().testCase(mas);
 
     }
 }
