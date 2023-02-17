@@ -11,27 +11,23 @@ public class PropertiesManager {
     private String pathToProp;
     private Properties prop;
     private static final Logger logger = LogManager.getLogger(PropertiesManager.class);
-    private final String DEFAULT_PATH = "/src/main/resources/dbcreds.properties";
+    private String defaultPath = "/src/main/resources/dbcreds.properties";
 
     public PropertiesManager() {
-        pathToProp = System.getProperty("user.dir") + DEFAULT_PATH;
-    }
-
-    public PropertiesManager(String pathToProp) {
-        this.pathToProp = System.getProperty("user.dir") + pathToProp;
+        loadData();
+        pathToProp = System.getProperty("user.dir") + defaultPath;
     }
 
     private void loadData() {
         prop = new Properties();
-        try {
-            prop.load(new FileInputStream(pathToProp));
+        try (FileInputStream fileInputStream = new FileInputStream(pathToProp)){
+            prop.load(fileInputStream);
         } catch (IOException e) {
             logger.warn("Couldn't find a property file");
         }
     }
 
     public String getProperty(String propertyName) {
-        loadData();
         return prop.getProperty(propertyName);
     }
 }

@@ -51,5 +51,4 @@ public class ScannerGetter {
         } while (res.length() == 0);
         return res;
     }
-
 }
