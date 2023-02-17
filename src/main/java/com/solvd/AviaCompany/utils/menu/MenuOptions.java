@@ -7,8 +7,6 @@ public enum MenuOptions {
     UPDATE,
     DELETE,
     BOOK_FLIGHT,
-
     TICKET_CREATION,
-
     EXIT;
 }

@@ -7,46 +7,44 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MenuService {
-    private final Logger LOGGER = LogManager.getLogger(MenuService.class);
+    private final Logger logger = LogManager.getLogger(MenuService.class);
     private MenuOptions currentOption = MenuOptions.ALL;
-    private GetDAO.AvailableOptions choice = null;
-    private final CaseALL caseALL = new CaseALL();
-    private final CaseBOOK_FLIGHT caseBOOK_FLIGHT = new CaseBOOK_FLIGHT();
-    private final CaseEXIT caseEXIT = new CaseEXIT();
-    private final CasePRINT casePRINT = new CasePRINT();
-    private final GetDAO getDAO = new GetDAO();
-
-
+    private GetDao.AvailableOptions choice = null;
+    private final CaseAll caseAll = new CaseAll();
+    private final CaseBookFlight caseBookFlight = new CaseBookFlight();
+    private final CaseExit caseExit = new CaseExit();
+    private final CasePrint casePrint = new CasePrint();
+    private final GetDao getDao = new GetDao();
 
     public void menu() {
         Scanner sc = new Scanner(System.in);
-        getDAO.setLOGGER(LOGGER);
+        getDao.setlogger(logger);
         AtomicBoolean exit = new AtomicBoolean(false);
         while (!exit.get()) {
             switch (currentOption) {
                 case ALL -> {
-                    currentOption = caseALL.all(LOGGER, sc);
+                    currentOption = caseAll.all(logger, sc);
                 }
                 case PRINT -> {
-                    currentOption = casePRINT.print(LOGGER, sc, choice, getDAO);
+                    currentOption = casePrint.print(logger, sc, choice, getDao);
                 }
                 case ADD -> {
-                    //currentOption = CaseADD.add(LOGGER, sc, choice);
+                    //currentOption = CaseADD.add(logger, sc, choice);
                 }
                 case UPDATE -> {
-                    //currentOption = CaseUPDATE.update(LOGGER, sc, choice);
+                    //currentOption = CaseUPDATE.update(logger, sc, choice);
                 }
                 case DELETE -> {
-                    //currentOption = CaseDELETE.delete(LOGGER, sc, choice);
+                    //currentOption = CaseDELETE.delete(logger, sc, choice);
                 }
                 case BOOK_FLIGHT -> {
-                    currentOption = caseBOOK_FLIGHT.book(LOGGER, sc, choice);
+                    currentOption = caseBookFlight.book(logger, sc, choice);
                 }
                 case EXIT -> {
-                    currentOption = caseEXIT.exit(LOGGER, sc, exit);
+                    currentOption = caseExit.exit(logger, sc, exit);
                 }
                 default -> {
-                    LOGGER.fatal("INVALID ENUM CASE");
+                    logger.fatal("INVALID ENUM CASE");
                     throw new RuntimeException("INVALID ENUM CASE");
                 }
             }

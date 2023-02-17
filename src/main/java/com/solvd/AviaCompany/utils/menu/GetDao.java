@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Scanner;
 
-public class GetDAO {
+public class GetDao {
 
     public enum AvailableOptions {
         AIRPORTS,
@@ -13,15 +13,15 @@ public class GetDAO {
         PILOTS,
         PLANES,
         TICKETS,
-
         BACK
     }
-    //  C : 57   I : 12
-    private Logger LOGGER;
-    private boolean myBatis = false;
-    private GetDAO.AvailableOptions choice = GetDAO.AvailableOptions.BACK;
 
-    public GetDAO.AvailableOptions getChoice() {
+    //  C : 57   I : 12
+    private Logger logger;
+    private boolean myBatis = false;
+    private GetDao.AvailableOptions choice = GetDao.AvailableOptions.BACK;
+
+    public GetDao.AvailableOptions getChoice() {
         return choice;
     }
 
@@ -31,7 +31,7 @@ public class GetDAO {
 
 
     public IBaseDAO getDAO(Scanner sc) {
-        LOGGER.info("""
+        logger.info("""
                                 
                 (1)  * AIRPORTS
                 (2)  * FLIGHTS
@@ -83,8 +83,8 @@ public class GetDAO {
         return dao;
     }
 
-    public GetDAO setLOGGER(Logger LOGGER) {
-        this.LOGGER = LOGGER;
-        return new GetDAO();
+    public GetDao setlogger(Logger logger) {
+        this.logger = logger;
+        return new GetDao();
     }
 }

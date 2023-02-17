@@ -10,7 +10,6 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class City {
-
     private int id;
     private String name;
     private int countryID;

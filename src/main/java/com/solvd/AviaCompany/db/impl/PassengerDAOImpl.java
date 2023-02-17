@@ -14,7 +14,7 @@ import static com.solvd.AviaCompany.db.tablecolumns.PassengerColumn.*;
 
 public class PassengerDAOImpl extends JDBCConnectionManager implements IPassengerDAO {
 
-    private static final Logger LOGGER = LogManager.getLogger(PassengerDAOImpl.class);
+    private static final Logger logger = LogManager.getLogger(PassengerDAOImpl.class);
     private static final String GET_PASSENGER_ID = "SELECT * FROM Passengers WHERE id = ?";
     private static final String INSERT_PASSENGER = "INSERT INTO Passengers(first_name, last_name) VALUES(?,?)";
     private static final String GET_ALL_PASSENGERS = "SELECT * FROM Passengers";
@@ -27,15 +27,15 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(INSERT_PASSENGER);
-            preparedStatement.setString(1, entity.getFname());
-            preparedStatement.setString(2, entity.getLname());
+            preparedStatement.setString(1, entity.getFirstName());
+            preparedStatement.setString(2, entity.getLastName());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 0) {
-                LOGGER.warn("No rows were inserted");
+                logger.warn("No rows were inserted");
                 return false;
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement  / Invalid field");
+            logger.warn("Wrong statement  / Invalid field");
         } finally {
             close(preparedStatement);
             close(connection);
@@ -55,12 +55,12 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
             while (resultSet.next()) {
                 Passenger passenger = new Passenger();
                 passenger.setId(resultSet.getInt(ID.getColumn()));
-                passenger.setFname(resultSet.getString(FIRST_NAME.getColumn()));
-                passenger.setLname(resultSet.getString(LAST_NAME.getColumn()));
+                passenger.setFirstName(resultSet.getString(FIRST_NAME.getColumn()));
+                passenger.setLastName(resultSet.getString(LAST_NAME.getColumn()));
                 passengerList.add(passenger);
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement / Invalid field");
+            logger.warn("Wrong statement / Invalid field");
         } finally {
             close(statement);
             close(connection);
@@ -75,16 +75,16 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(UPDATE_PASSENGER);
-            preparedStatement.setString(1, entity.getFname());
-            preparedStatement.setString(2, entity.getLname());
+            preparedStatement.setString(1, entity.getFirstName());
+            preparedStatement.setString(2, entity.getLastName());
             preparedStatement.setInt(3, entity.getId());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 0){
-                LOGGER.warn("No rows were inserted");
+                logger.warn("No rows were inserted");
                 return entity;
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement  / Invalid field");
+            logger.warn("Wrong statement  / Invalid field");
         } finally {
             close(preparedStatement);
             close(connection);
@@ -105,12 +105,12 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
             if (resultSet.next()) {
                 Passenger passenger = new Passenger();
                 passenger.setId(resultSet.getInt(ID.getColumn()));
-                passenger.setFname(resultSet.getString(FIRST_NAME.getColumn()));
-                passenger.setLname(resultSet.getString(LAST_NAME.getColumn()));
+                passenger.setFirstName(resultSet.getString(FIRST_NAME.getColumn()));
+                passenger.setLastName(resultSet.getString(LAST_NAME.getColumn()));
                 return passenger;
             }
         } catch (SQLException e) {
-            LOGGER.warn("Wrong statement  / Invalid field");
+            logger.warn("Wrong statement  / Invalid field");
         } finally {
             close(preparedStatement);
             close(connection);
