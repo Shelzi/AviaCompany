@@ -12,7 +12,7 @@ import java.util.Objects;
 public class City {
     private int id;
     private String name;
-    private int countryID;
+    private Country country;
 
     @Override
     public boolean equals(Object o) {
