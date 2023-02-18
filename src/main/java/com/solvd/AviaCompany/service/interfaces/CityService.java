@@ -12,5 +12,5 @@ public interface CityService {
 
     Optional<City> getCityByName(String name);
 
-    List<City> mapIdListToCity(List<Integer> list);
+    List<City> mapIndexListToCity(List<Integer> list);
 }

@@ -44,4 +44,9 @@ public class IntIntPair {
     public String toString() {
         return "[" + a + ", " + b + "]";
     }
+
+    public void sumTwoPairs(IntIntPair o){
+        a = a + o.a;
+        b = b + o.b;
+    }
 }

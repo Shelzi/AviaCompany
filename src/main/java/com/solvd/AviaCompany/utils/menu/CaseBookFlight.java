@@ -1,13 +1,10 @@
 package com.solvd.AviaCompany.utils.menu;
 
-import com.solvd.AviaCompany.hierarchy.City;
-import com.solvd.AviaCompany.hierarchy.Flight;
-import com.solvd.AviaCompany.service.impl.CityServiceImpl;
-import com.solvd.AviaCompany.service.impl.FlightGraphService;
-import com.solvd.AviaCompany.service.impl.FlightServiceImpl;
-import com.solvd.AviaCompany.service.impl.FloydWarshallPathfinderServiceImpl;
+import com.solvd.AviaCompany.hierarchy.*;
+import com.solvd.AviaCompany.service.impl.*;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -16,26 +13,21 @@ public class CaseBookFlight {
     private final FlightServiceImpl flightService = new FlightServiceImpl();
     private final CityServiceImpl cityService = new CityServiceImpl();
 
-    private Optional<Flight> FloydShortest(Logger logger, String from, String to,boolean distance) {
-        int[][] graph = new FlightGraphService().getMatrixFromList(flightService.getFlights());
-        Optional<City> optionalFrom = cityService.getCityByName(from);
-        if(optionalFrom.isEmpty()){
-            logger.info(" Sorry, we don't fly from " + from);
-            return Optional.ofNullable(null);
+    private Optional<ComplexRoute> FloydShortest(Logger logger, String from, String to, boolean distance) {
+        IntIntPair[][] graph = new PairGraphBuilder().getMatrixFromList(flightService.getFlights());
+        List<IntIntPair> weights = new ArrayList<>();
+        int fromId = cityService.getIndexOfCityByName(from);
+        int toId = cityService.getIndexOfCityByName(to);
+        if(fromId == -1 || toId == -1){
+            return Optional.empty();
         }
-        Optional<City> optionalTo = cityService.getCityByName(to);
-        if(optionalTo.isEmpty()){
-            logger.info(" Sorry we dont fly to " + to);
-            return Optional.ofNullable(null);
-        }
-        int fromId = optionalFrom.get().getId(), toId = optionalTo.get().getId();
-        List<Integer> ids = new FloydWarshallPathfinderServiceImpl().findPath(graph, fromId, toId);
-        List<City> cityList = cityService.mapIdListToCity(ids);
-        return Optional.ofNullable(null);
+        List<Integer> ids = new FloydPairs().findPath(graph, fromId, toId, distance, weights);
+        List<City> cities = cityService.mapIndexListToCity(ids);
+        return Optional.of(new ComplexRoute(cities, weights));
     }
 
-    private Optional<Flight> FloydCheapest(Logger logger, String from, String to) {
-        return Optional.ofNullable(null);
+    private Optional<ComplexRoute> FloydCheapest(Logger logger, String from, String to) {
+        return FloydShortest(logger, from, to, false);
     }
 
     public MenuOptions book(Logger logger, Scanner sc, GetDao.AvailableOptions choice) {
@@ -43,10 +35,11 @@ public class CaseBookFlight {
 
         String from, to;
         boolean stillChoosing;
-        boolean buyingTicket = false;
-        Flight flightToBuy = null;
+        boolean buyingTicket;
+        ComplexRoute flightToBuy;
 
         do {
+            flightToBuy = null;
             stillChoosing = false;
             buyingTicket = false;
             logger.info(" FROM:");
@@ -54,16 +47,27 @@ public class CaseBookFlight {
             logger.info(" TO:");
             to = ScannerGetter.getString(sc);
 
-            Optional<Flight> shortest = FloydShortest(logger, from, to, true);
-            if (shortest.isEmpty()) {
+            Optional<ComplexRoute> shortest = FloydShortest(logger, from, to, true);
+            if (shortest.isEmpty() || shortest.get().getCities().isEmpty()) {
                 logger.info(" We are sorry, but there is no available route from " + from + " to " + to);
-                currentOption = MenuOptions.ALL;
-                return currentOption;
+                logger.info(""" 
+                        Would you like to choose another route?
+                        (1)  * YES
+                        (0)  * EXIT
+                        """);
+                int c = ScannerGetter.getInt(sc, 0, 1);
+                if(c == 1){
+                    stillChoosing = true;
+                    continue;
+                }
+                else{
+                    currentOption = MenuOptions.ALL;
+                    return currentOption;
+                }
             }
-
-            Optional<Flight> cheapest = FloydCheapest(logger, from, to);
+            Optional<ComplexRoute> cheapest = FloydCheapest(logger, from, to);
             if (cheapest.equals(shortest)) {
-                logger.info(" We have only one available route for you: " + shortest);
+                logger.info(" We have only one available route for you: " + shortest.get().toString());
                 logger.info(""" 
                         Would you like to book it ?
                         (1)  * YES
@@ -107,7 +111,7 @@ public class CaseBookFlight {
                         flightToBuy = cheapest.get();
                     }
                     case 3 -> {
-                        logger.info(" GREAT! WHAT IS YOUR ROTE");
+                        logger.info(" GREAT! WHAT IS YOUR ROUTE");
                         stillChoosing = true;
                     }
                     default -> {
@@ -115,13 +119,19 @@ public class CaseBookFlight {
                     }
                 }
             }
+            if(flightToBuy != null){
+                logger.info("Great then provide us passenger data:");
+                logger.info("First Name:");
+                String fname = ScannerGetter.getString(sc);
+                logger.info("Last Name");
+                String lname = ScannerGetter.getString(sc);
+                Passenger p = new Passenger(1, fname, lname);
+                List<Ticket> tickets = flightToBuy.getFlights(p);
+
+            }
         }
         while (stillChoosing);
-
-        if (buyingTicket)
-            currentOption = MenuOptions.TICKET_CREATION;
-        else
-            currentOption = MenuOptions.ALL;
+        currentOption = MenuOptions.ALL;
         return currentOption;
     }
 }
