@@ -67,7 +67,9 @@ public class DataFactory {
         for (Map.Entry<String, Integer> entry : citiesMap.entrySet()) {
             City city = new City();
             city.setName(entry.getKey());
-            city.setCountryID(entry.getValue());
+            Country country = new Country();
+            country.setId(entry.getValue());
+            city.setCountry(country);
             cityDAO.create(city);
         }
         return true;

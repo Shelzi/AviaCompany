@@ -14,8 +14,8 @@ public class PropertiesManager {
     private String defaultPath = "/src/main/resources/dbcreds.properties";
 
     public PropertiesManager() {
-        loadData();
         pathToProp = System.getProperty("user.dir") + defaultPath;
+        loadData();
     }
 
     private void loadData() {

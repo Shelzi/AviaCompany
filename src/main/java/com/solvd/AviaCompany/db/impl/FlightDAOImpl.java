@@ -1,7 +1,11 @@
 package com.solvd.AviaCompany.db.impl;
 
 import com.solvd.AviaCompany.db.dao.IFlightDAO;
+import com.solvd.AviaCompany.db.tablecolumns.CityColumn;
+import com.solvd.AviaCompany.db.tablecolumns.CountryColumn;
+import com.solvd.AviaCompany.db.tablecolumns.FlightColumn;
 import com.solvd.AviaCompany.hierarchy.City;
+import com.solvd.AviaCompany.hierarchy.Country;
 import com.solvd.AviaCompany.hierarchy.Flight;
 import com.solvd.AviaCompany.utils.connection.JDBCConnectionManager;
 import org.apache.logging.log4j.LogManager;
@@ -12,14 +16,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.solvd.AviaCompany.db.tablecolumns.FlightColumn.*;
+import static com.solvd.AviaCompany.db.tablecolumns.PassengerColumn.*;
+import static com.solvd.AviaCompany.db.tablecolumns.TicketColumn.FLIGHT;
 
 public class FlightDAOImpl extends JDBCConnectionManager implements IFlightDAO {
 
     private static final Logger logger = LogManager.getLogger(FlightDAOImpl.class);
 
-    private static final String GET_ALL_FLIGHTS = "SELECT * FROM Flights";
+    private static final String GET_ALL_FLIGHTS = "SELECT f.id as flights_id, f.cost, f.distance, " +
+            "dep_city.name as dep_name, dep_city.id as dep_id, " +
+            "dest_city.name as dest_name, dest_city.id as dest_id, " +
+            "dep_co.id as dep_country_id, dep_co.name as dep_country_name, " +
+            "dest_co.id as dest_country_id, dest_co.name as dest_country_name " +
+            "FROM Flights f LEFT JOIN city dep_city ON f.dep_city_id = dep_city.id " +
+            "LEFT JOIN city dest_city ON f.dest_city_id = dest_city.id " +
+            "LEFT JOIN country dep_co ON dep_city.country_id = dep_co.id " +
+            "LEFT JOIN country dest_co ON dest_city.country_id = dest_co.id";
     private static final String INSERT_FLIGHT = "INSERT INTO Flights(dep_city_id," +
             "dest_city_id, cost, distance) VALUES(?,?,?,?)";
+
+    private static final String GET_FLIGHT_ID = GET_ALL_FLIGHTS + " WHERE f.id = ?";
 
     @Override
     public boolean create(Flight entity) {
@@ -56,15 +72,33 @@ public class FlightDAOImpl extends JDBCConnectionManager implements IFlightDAO {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(GET_ALL_FLIGHTS);
             while (resultSet.next()) {
-                City departure = new CityDAOImpl().read(resultSet.getInt(DEPARTURE.getColumn()));
-                City destination = new CityDAOImpl().read(resultSet.getInt(DESTINATION.getColumn()));
-
                 Flight flight = new Flight();
-                flight.setId(resultSet.getInt(ID.getColumn()));
-                flight.setDeparture(departure);
-                flight.setDestination(destination);
-                flight.setCost(resultSet.getInt(COST.getColumn()));
-                flight.setDistance(resultSet.getInt(DISTANCE.getColumn()));
+                City departureCity = new City();
+                City destinationCity = new City();
+                Country departureCountry = new Country();
+                Country destinationCountry = new Country();
+
+                flight.setId(resultSet.getInt(FLIGHT.getColumn()));
+                flight.setDistance(resultSet.getInt(FlightColumn.DISTANCE.getColumn()));
+                flight.setCost(resultSet.getInt(FlightColumn.COST.getColumn()));
+
+                departureCity.setId(resultSet.getInt("dep_" + CityColumn.ID.getColumn()));
+                departureCity.setName(resultSet.getString("dep_" + CityColumn.NAME.getColumn()));
+
+                destinationCity.setId(resultSet.getInt("dest_" + CityColumn.ID.getColumn()));
+                destinationCity.setName(resultSet.getString("dest_" + CityColumn.NAME.getColumn()));
+
+                departureCountry.setId(resultSet.getInt("dep_country_" + CountryColumn.ID.getColumn()));
+                departureCountry.setName(resultSet.getString("dep_country_" + CountryColumn.NAME.getColumn()));
+
+                destinationCountry.setId(resultSet.getInt("dest_country_" + CountryColumn.ID.getColumn()));
+                destinationCountry.setName(resultSet.getString("dest_country_" + CountryColumn.NAME.getColumn()));
+
+                departureCity.setCountry(departureCountry);
+                destinationCity.setCountry(destinationCountry);
+
+                flight.setDeparture(departureCity);
+                flight.setDestination(destinationCity);
                 flightList.add(flight);
             }
         } catch (SQLException e) {
@@ -83,6 +117,50 @@ public class FlightDAOImpl extends JDBCConnectionManager implements IFlightDAO {
 
     @Override
     public Flight read(Integer id) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(GET_FLIGHT_ID);
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                Flight flight = new Flight();
+                City departureCity = new City();
+                City destinationCity = new City();
+                Country departureCountry = new Country();
+                Country destinationCountry = new Country();
+
+                flight.setId(resultSet.getInt(FLIGHT.getColumn()));
+                flight.setDistance(resultSet.getInt(FlightColumn.DISTANCE.getColumn()));
+                flight.setCost(resultSet.getInt(FlightColumn.COST.getColumn()));
+
+                departureCity.setId(resultSet.getInt("dep_" + CityColumn.ID.getColumn()));
+                departureCity.setName(resultSet.getString("dep_" + CityColumn.NAME.getColumn()));
+
+                destinationCity.setId(resultSet.getInt("dest_" + CityColumn.ID.getColumn()));
+                destinationCity.setName(resultSet.getString("dest_" + CityColumn.NAME.getColumn()));
+
+                departureCountry.setId(resultSet.getInt("dep_country_" + CountryColumn.ID.getColumn()));
+                departureCountry.setName(resultSet.getString("dep_country_" + CountryColumn.NAME.getColumn()));
+
+                destinationCountry.setId(resultSet.getInt("dest_country_" + CountryColumn.ID.getColumn()));
+                destinationCountry.setName(resultSet.getString("dest_country_" + CountryColumn.NAME.getColumn()));
+
+                departureCity.setCountry(departureCountry);
+                destinationCity.setCountry(destinationCountry);
+
+                flight.setDeparture(departureCity);
+                flight.setDestination(destinationCity);
+                return flight;
+            }
+        } catch (SQLException e) {
+            logger.warn("Wrong statement  / Invalid field");
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
         return null;
     }
 

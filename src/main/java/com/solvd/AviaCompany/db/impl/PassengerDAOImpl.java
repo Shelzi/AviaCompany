@@ -19,7 +19,7 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
     private static final String INSERT_PASSENGER = "INSERT INTO Passengers(first_name, last_name) VALUES(?,?)";
     private static final String GET_ALL_PASSENGERS = "SELECT * FROM Passengers";
     private static final String UPDATE_PASSENGER = "UPDATE Passengers SET first_name=?, last_name=? WHERE id=?";
-    private static final String GET_PASSENGER_BY_FNAME_LNAME = "SELECT * FROM Passengers " +
+    private static final String GET_PASSENGER_BY_FIRST_NAME_AND_LAST_NAME = "SELECT * FROM Passengers " +
             "WHERE first_name = ? AND last_name = ?";
 
     @Override
@@ -29,8 +29,8 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(INSERT_PASSENGER);
-            preparedStatement.setString(1, entity.getfName());
-            preparedStatement.setString(2, entity.getlName());
+            preparedStatement.setString(1, entity.getFirstName());
+            preparedStatement.setString(2, entity.getLastName());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 0) {
                 logger.warn("No rows were inserted");
@@ -57,8 +57,8 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
             while (resultSet.next()) {
                 Passenger passenger = new Passenger();
                 passenger.setId(resultSet.getInt(ID.getColumn()));
-                passenger.setfName(resultSet.getString(FIRST_NAME.getColumn()));
-                passenger.setlName(resultSet.getString(LAST_NAME.getColumn()));
+                passenger.setFirstName(resultSet.getString(FIRST_NAME.getColumn()));
+                passenger.setLastName(resultSet.getString(LAST_NAME.getColumn()));
                 passengerList.add(passenger);
             }
         } catch (SQLException e) {
@@ -77,8 +77,8 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(UPDATE_PASSENGER);
-            preparedStatement.setString(1, entity.getfName());
-            preparedStatement.setString(2, entity.getlName());
+            preparedStatement.setString(1, entity.getFirstName());
+            preparedStatement.setString(2, entity.getLastName());
             preparedStatement.setInt(3, entity.getId());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 0) {
@@ -107,8 +107,8 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
             if (resultSet.next()) {
                 Passenger passenger = new Passenger();
                 passenger.setId(resultSet.getInt(ID.getColumn()));
-                passenger.setfName(resultSet.getString(FIRST_NAME.getColumn()));
-                passenger.setfName(resultSet.getString(LAST_NAME.getColumn()));
+                passenger.setFirstName(resultSet.getString(FIRST_NAME.getColumn()));
+                passenger.setLastName(resultSet.getString(LAST_NAME.getColumn()));
                 return passenger;
             }
         } catch (SQLException e) {
@@ -136,7 +136,7 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
         PreparedStatement preparedStatement = null;
         try {
             connection = getConnection();
-            preparedStatement = connection.prepareStatement(GET_PASSENGER_BY_FNAME_LNAME);
+            preparedStatement = connection.prepareStatement(GET_PASSENGER_BY_FIRST_NAME_AND_LAST_NAME);
             preparedStatement.setString(1, firstName);
             preparedStatement.setString(2, lastName);
 
@@ -144,8 +144,8 @@ public class PassengerDAOImpl extends JDBCConnectionManager implements IPassenge
             if (resultSet.next()) {
                 Passenger passenger = new Passenger();
                 passenger.setId(resultSet.getInt(ID.getColumn()));
-                passenger.setfName(resultSet.getString(FIRST_NAME.getColumn()));
-                passenger.setlName(resultSet.getString(LAST_NAME.getColumn()));
+                passenger.setFirstName(resultSet.getString(FIRST_NAME.getColumn()));
+                passenger.setLastName(resultSet.getString(LAST_NAME.getColumn()));
                 return passenger;
             }
         } catch (SQLException e) {
