@@ -1,4 +1,4 @@
-package com.solvd.AviaCompany.db.dao;
+package com.solvd.aviacompany.db.dao;
 
 import java.util.List;
 

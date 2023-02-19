@@ -1,13 +1,13 @@
-package com.solvd.AviaCompany.db.impl;
+package com.solvd.aviacompany.db.impl;
 
-import com.solvd.AviaCompany.db.dao.IFlightDAO;
-import com.solvd.AviaCompany.db.tablecolumns.CityColumn;
-import com.solvd.AviaCompany.db.tablecolumns.CountryColumn;
-import com.solvd.AviaCompany.db.tablecolumns.FlightColumn;
-import com.solvd.AviaCompany.hierarchy.City;
-import com.solvd.AviaCompany.hierarchy.Country;
-import com.solvd.AviaCompany.hierarchy.Flight;
-import com.solvd.AviaCompany.utils.connection.JDBCConnectionManager;
+import com.solvd.aviacompany.db.dao.IFlightDAO;
+import com.solvd.aviacompany.db.tablecolumns.CityColumn;
+import com.solvd.aviacompany.db.tablecolumns.CountryColumn;
+import com.solvd.aviacompany.db.tablecolumns.FlightColumn;
+import com.solvd.aviacompany.hierarchy.City;
+import com.solvd.aviacompany.hierarchy.Country;
+import com.solvd.aviacompany.hierarchy.Flight;
+import com.solvd.aviacompany.utils.connection.JDBCConnectionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,9 +15,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.solvd.AviaCompany.db.tablecolumns.FlightColumn.*;
-import static com.solvd.AviaCompany.db.tablecolumns.PassengerColumn.*;
-import static com.solvd.AviaCompany.db.tablecolumns.TicketColumn.FLIGHT;
+import static com.solvd.aviacompany.db.tablecolumns.TicketColumn.FLIGHT;
 
 public class FlightDAOImpl extends JDBCConnectionManager implements IFlightDAO {
 

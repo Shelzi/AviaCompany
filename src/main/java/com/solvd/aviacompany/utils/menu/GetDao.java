@@ -1,12 +1,12 @@
-package com.solvd.AviaCompany.utils.menu;
+package com.solvd.aviacompany.utils.menu;
 
-import com.solvd.AviaCompany.db.dao.IBaseDAO;
+import com.solvd.aviacompany.db.dao.IBaseDAO;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Scanner;
 
 public class GetDao {
-
     public enum AvailableOptions {
         AIRPORTS,
         FLIGHTS,
@@ -16,19 +16,11 @@ public class GetDao {
         BACK
     }
 
-    //  C : 57   I : 12
-    private Logger logger;
-    private boolean myBatis = false;
+    private final Logger logger = LogManager.getLogger();
     private GetDao.AvailableOptions choice = GetDao.AvailableOptions.BACK;
-
     public GetDao.AvailableOptions getChoice() {
         return choice;
     }
-
-    public void setMyBatis(boolean f) {
-        myBatis = f;
-    }
-
 
     public IBaseDAO getDAO(Scanner sc) {
         logger.info("""
@@ -81,10 +73,5 @@ public class GetDao {
             }
         }
         return dao;
-    }
-
-    public GetDao setlogger(Logger logger) {
-        this.logger = logger;
-        return new GetDao();
     }
 }

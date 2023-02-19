@@ -1,14 +1,16 @@
-package com.solvd.AviaCompany.service.impl;
+package com.solvd.aviacompany.service.impl;
 
-import com.solvd.AviaCompany.hierarchy.City;
-import com.solvd.AviaCompany.hierarchy.Country;
-import com.solvd.AviaCompany.hierarchy.Flight;
+import com.solvd.aviacompany.hierarchy.City;
+import com.solvd.aviacompany.hierarchy.Flight;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class PairGraphBuilder {
     private static final IntIntPair INF = new IntIntPair(Integer.MAX_VALUE / 2, Integer.MAX_VALUE / 2);
-    //private static final IntIntPair INF = new IntIntPair(-2, -2);
+
     public IntIntPair[][] getMatrixFromList(List<Flight> flightList) {
         // Create a map from city IDs to city objects
         Map<Integer, City> cityMap = new TreeMap<>();
@@ -42,9 +44,6 @@ public class PairGraphBuilder {
             int j = cityIndexMap.get(flight.getDestination());
             matrix[i][j] = new IntIntPair(flight.getCost(), flight.getDistance());
         }
-
-
         return matrix;
     }
-
 }

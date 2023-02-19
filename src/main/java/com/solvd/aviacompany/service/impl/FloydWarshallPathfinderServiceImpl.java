@@ -1,6 +1,6 @@
-package com.solvd.AviaCompany.service.impl;
+package com.solvd.aviacompany.service.impl;
 
-import com.solvd.AviaCompany.service.interfaces.PathfinderService;
+import com.solvd.aviacompany.service.interfaces.PathfinderService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FloydWarshallPathfinderServiceImpl implements PathfinderService {
-
     private static final int INF = Integer.MAX_VALUE / 2;
     private static final int OFFSET = 1;
-
     private static final Logger logger = LogManager.getLogger();
 
     public List<Integer> findPath(int[][] graph, int src, int dest) {

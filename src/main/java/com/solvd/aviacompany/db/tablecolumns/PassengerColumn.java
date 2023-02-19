@@ -1,4 +1,4 @@
-package com.solvd.AviaCompany.db.tablecolumns;
+package com.solvd.aviacompany.db.tablecolumns;
 
 public enum PassengerColumn {
 

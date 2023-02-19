@@ -1,6 +1,6 @@
-package com.solvd.AviaCompany.db.dao;
+package com.solvd.aviacompany.db.dao;
 
-import com.solvd.AviaCompany.hierarchy.Flight;
+import com.solvd.aviacompany.hierarchy.Flight;
 
 public interface IFlightDAO extends IBaseDAO<Integer, Flight> {
 }

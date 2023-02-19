@@ -1,4 +1,4 @@
-package com.solvd.AviaCompany.hierarchy;
+package com.solvd.aviacompany.hierarchy;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class Ticket {
     private Passenger passenger;
     private Flight flight;
-
 }

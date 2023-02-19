@@ -1,6 +1,6 @@
-package com.solvd.AviaCompany.db.dao;
+package com.solvd.aviacompany.db.dao;
 
-import com.solvd.AviaCompany.hierarchy.City;
+import com.solvd.aviacompany.hierarchy.City;
 
 public interface ICityDAO extends IBaseDAO<Integer, City>{
 

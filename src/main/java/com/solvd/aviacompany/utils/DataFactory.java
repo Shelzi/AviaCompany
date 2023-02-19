@@ -1,27 +1,26 @@
-package com.solvd.AviaCompany.utils;
+package com.solvd.aviacompany.utils;
 
-import com.solvd.AviaCompany.db.impl.CityDAOImpl;
-import com.solvd.AviaCompany.db.impl.CountryDAOImpl;
-import com.solvd.AviaCompany.db.impl.FlightDAOImpl;
-import com.solvd.AviaCompany.hierarchy.City;
-import com.solvd.AviaCompany.hierarchy.Country;
-import com.solvd.AviaCompany.hierarchy.Flight;
+import com.solvd.aviacompany.db.impl.CityDAOImpl;
+import com.solvd.aviacompany.db.impl.CountryDAOImpl;
+import com.solvd.aviacompany.db.impl.FlightDAOImpl;
+import com.solvd.aviacompany.hierarchy.City;
+import com.solvd.aviacompany.hierarchy.Country;
+import com.solvd.aviacompany.hierarchy.Flight;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class DataFactory {
-
-
     public void createData() {
         createCountriesTable();
         createCitiesTable();
         createFlightsTable();
     }
 
-    private boolean createCountriesTable() {
+    private void createCountriesTable() {
         Map<Integer, String> countriesMap = new HashMap<>() {{
             put(112, "Belarus");
             put(440, "Lithuania");
@@ -42,10 +41,9 @@ public class DataFactory {
             country.setName(entry.getValue());
             countryDAO.create(country);
         }
-        return true;
     }
 
-    private boolean createCitiesTable() {
+    private void createCitiesTable() {
         Map<String, Integer> citiesMap = new HashMap<>() {{
             put("Minsk", 112);
             put("Vilnius", 440);
@@ -72,10 +70,9 @@ public class DataFactory {
             city.setCountry(country);
             cityDAO.create(city);
         }
-        return true;
     }
 
-    private boolean createFlightsTable() {
+    private void createFlightsTable() {
         int flightsNum = 10;
         FlightDAOImpl flightsDAO = new FlightDAOImpl();
         CityDAOImpl cityDAO = new CityDAOImpl();
@@ -84,21 +81,22 @@ public class DataFactory {
         List<String> listOfPairs = new ArrayList<>();
         for (int i = 0; i < flightsNum; i++) {
             Flight flight = new Flight();
-            int i1, i2;
+            int i1;
+            int i2;
+            Random random = new Random();
             do {
-                i1 = (int) (Math.random() * 13 + 1);
-                i2 = (int) (Math.random() * 13 + 1);
-                String pair = Integer.toString(i1) + Integer.toString(i2);
+                i1 = random.nextInt(14);
+                i2 = random.nextInt(14);
+                String pair = Integer.toString(i1) + i2;
                 if ((i1 != i2) && (!listOfPairs.contains(pair))) {
                     flight.setDeparture(cityDAO.read(i1));
                     flight.setDestination(cityDAO.read(i2));
                     listOfPairs.add(pair);
                 }
             } while (i1 == i2);
-            flight.setCost(costList[(int) (Math.random() * 9)]);
-            flight.setDistance(distanceList[(int) (Math.random() * 9)]);
+            flight.setCost(costList[random.nextInt(10)]);
+            flight.setDistance(distanceList[random.nextInt(10)]);
             flightsDAO.create(flight);
         }
-        return true;
     }
 }

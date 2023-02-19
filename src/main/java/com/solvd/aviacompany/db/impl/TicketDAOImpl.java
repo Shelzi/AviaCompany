@@ -1,12 +1,12 @@
-package com.solvd.AviaCompany.db.impl;
+package com.solvd.aviacompany.db.impl;
 
-import com.solvd.AviaCompany.db.dao.ITicketDAO;
-import com.solvd.AviaCompany.db.tablecolumns.CityColumn;
-import com.solvd.AviaCompany.db.tablecolumns.CountryColumn;
-import com.solvd.AviaCompany.db.tablecolumns.FlightColumn;
-import com.solvd.AviaCompany.db.tablecolumns.PassengerColumn;
-import com.solvd.AviaCompany.hierarchy.*;
-import com.solvd.AviaCompany.utils.connection.JDBCConnectionManager;
+import com.solvd.aviacompany.db.dao.ITicketDAO;
+import com.solvd.aviacompany.db.tablecolumns.CityColumn;
+import com.solvd.aviacompany.db.tablecolumns.CountryColumn;
+import com.solvd.aviacompany.db.tablecolumns.FlightColumn;
+import com.solvd.aviacompany.db.tablecolumns.PassengerColumn;
+import com.solvd.aviacompany.hierarchy.*;
+import com.solvd.aviacompany.utils.connection.JDBCConnectionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +14,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.solvd.AviaCompany.db.tablecolumns.TicketColumn.*;
+import static com.solvd.aviacompany.db.tablecolumns.TicketColumn.*;
 
 public class TicketDAOImpl extends JDBCConnectionManager implements ITicketDAO {
 

@@ -1,21 +1,14 @@
-package com.solvd.AviaCompany;
+package com.solvd.aviacompany;
 
-import com.solvd.AviaCompany.db.impl.FlightDAOImpl;
-import com.solvd.AviaCompany.hierarchy.Country;
-import com.solvd.AviaCompany.service.impl.*;
-import com.solvd.AviaCompany.utils.DataFactory;
-import com.solvd.AviaCompany.hierarchy.City;
-import com.solvd.AviaCompany.hierarchy.Flight;
-import com.solvd.AviaCompany.utils.menu.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.solvd.aviacompany.utils.menu.*;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println((Math.random() * 13 + 1));
         //new DataFactory().createData();
-        MenuService menuService = new MenuService();
-        menuService.menu();
+
+/*        MenuService menuService = new MenuService();
+        menuService.menu();*/
 //        ArrayList<Flight> flights = new ArrayList<>();
 //        City Brest = new City(2, "Brest", new Country());
 //        City Minsk = new City(1, "Minsk", new Country());

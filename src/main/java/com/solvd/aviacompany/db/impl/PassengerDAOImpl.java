@@ -1,8 +1,8 @@
-package com.solvd.AviaCompany.db.impl;
+package com.solvd.aviacompany.db.impl;
 
-import com.solvd.AviaCompany.db.dao.IPassengerDAO;
-import com.solvd.AviaCompany.hierarchy.Passenger;
-import com.solvd.AviaCompany.utils.connection.JDBCConnectionManager;
+import com.solvd.aviacompany.db.dao.IPassengerDAO;
+import com.solvd.aviacompany.hierarchy.Passenger;
+import com.solvd.aviacompany.utils.connection.JDBCConnectionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.solvd.AviaCompany.db.tablecolumns.PassengerColumn.*;
+import static com.solvd.aviacompany.db.tablecolumns.PassengerColumn.*;
 
 public class PassengerDAOImpl extends JDBCConnectionManager implements IPassengerDAO {
 

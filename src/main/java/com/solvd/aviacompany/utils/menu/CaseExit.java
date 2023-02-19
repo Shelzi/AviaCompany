@@ -1,4 +1,4 @@
-package com.solvd.AviaCompany.utils.menu;
+package com.solvd.aviacompany.utils.menu;
 
 import org.apache.logging.log4j.Logger;
 
@@ -6,7 +6,6 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CaseExit {
-
     public MenuOptions exit(Logger logger, Scanner sc, AtomicBoolean exit) {
          MenuOptions currentOption =  MenuOptions.ALL;
         logger.info("\n     * ARE YOU SURE (y/n):");
@@ -27,5 +26,4 @@ public class CaseExit {
         }
         return currentOption;
     }
-
 }

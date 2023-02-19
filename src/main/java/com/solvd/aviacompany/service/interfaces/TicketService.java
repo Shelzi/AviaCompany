@@ -1,11 +1,10 @@
-package com.solvd.AviaCompany.service.interfaces;
+package com.solvd.aviacompany.service.interfaces;
 
-import com.solvd.AviaCompany.hierarchy.Ticket;
+import com.solvd.aviacompany.hierarchy.Ticket;
 
 import java.util.List;
 
 public interface TicketService {
-
     boolean addTicket(Ticket entity);
     List<Ticket> getAllTickets();
 }

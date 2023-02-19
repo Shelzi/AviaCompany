@@ -1,6 +1,6 @@
-package com.solvd.AviaCompany.service.impl;
+package com.solvd.aviacompany.service.impl;
 
-import com.solvd.AviaCompany.service.interfaces.CityService;
+import com.solvd.aviacompany.service.interfaces.CityService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,8 +10,9 @@ import java.util.List;
 public class FloydPairs {
     private static final IntIntPair INF = new IntIntPair(Integer.MAX_VALUE / 2, Integer.MAX_VALUE / 2);
     private static final int OFFSET = 1;
-
     private static final Logger logger = LogManager.getLogger();
+    private static final CityService cityService = new CityServiceImpl();
+
 
 
     public List<Integer> findPath(IntIntPair[][] graph, int src, int dest, boolean a, List<IntIntPair> weights){
@@ -57,7 +58,7 @@ public class FloydPairs {
             return path;
         }
         path.add(src);
-        int previous = src;
+        int previous;
         while (src != dest) {
             previous = src;
             src = next[src][dest];
@@ -73,9 +74,7 @@ public class FloydPairs {
         if (path.isEmpty()) {
             logger.info("There is no path between " + src + " and " + dest);
         } else {
-            CityService cityService = new CityServiceImpl();
-            StringBuilder builder = new StringBuilder("Shortest path between " + src + " and "
-                    + dest + ": ");
+            StringBuilder builder = new StringBuilder("Shortest path between " + src + " and " + dest + ": ");
             for (int i = 0; i < path.size(); i++) {
                 builder.append(path.get(i) + OFFSET);
                 if (i != path.size() - 1) {
@@ -89,9 +88,7 @@ public class FloydPairs {
                     builder.append(" -> ");
                 }
             }
-
             logger.info(builder);
         }
     }
-
 }

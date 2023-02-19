@@ -1,9 +1,8 @@
-package com.solvd.AviaCompany.hierarchy;
+package com.solvd.aviacompany.hierarchy;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Data
 @AllArgsConstructor

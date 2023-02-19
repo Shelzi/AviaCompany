@@ -1,6 +1,6 @@
-package com.solvd.AviaCompany.utils.connection;
+package com.solvd.aviacompany.utils.connection;
 
-import com.solvd.AviaCompany.utils.PropertiesManager;
+import com.solvd.aviacompany.utils.PropertiesManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,14 +10,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JDBCConnectionManager {
-
     private static final Logger logger = LogManager.getLogger(JDBCConnectionManager.class);
-
-    PropertiesManager propertiesManager;
+    private static final PropertiesManager propertiesManager = new PropertiesManager();
 
     public Connection getConnection() {
         try {
-            propertiesManager = new PropertiesManager();
             Class.forName(propertiesManager.getProperty("DRIVER_NAME"));
 
             return DriverManager.getConnection(

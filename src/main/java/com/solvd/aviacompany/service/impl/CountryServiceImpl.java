@@ -1,9 +1,9 @@
-package com.solvd.AviaCompany.service.impl;
+package com.solvd.aviacompany.service.impl;
 
-import com.solvd.AviaCompany.db.dao.ICountryDAO;
-import com.solvd.AviaCompany.db.impl.CountryDAOImpl;
-import com.solvd.AviaCompany.hierarchy.Country;
-import com.solvd.AviaCompany.service.interfaces.CountryService;
+import com.solvd.aviacompany.db.dao.ICountryDAO;
+import com.solvd.aviacompany.db.impl.CountryDAOImpl;
+import com.solvd.aviacompany.hierarchy.Country;
+import com.solvd.aviacompany.service.interfaces.CountryService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class CountryServiceImpl implements CountryService {
 
     private static final Logger logger = LogManager.getLogger(CountryServiceImpl.class);
-    private ICountryDAO iCountryDAO;
+    private final ICountryDAO iCountryDAO;
 
     public CountryServiceImpl() {
         this.iCountryDAO = new CountryDAOImpl();

@@ -1,8 +1,10 @@
-package com.solvd.AviaCompany.utils.menu;
+package com.solvd.aviacompany.utils.menu;
 
 import java.util.Scanner;
 
 public class ScannerGetter {
+    private ScannerGetter() {
+    }
 
     public static int getInt(Scanner sc) {
         boolean validInt = false;

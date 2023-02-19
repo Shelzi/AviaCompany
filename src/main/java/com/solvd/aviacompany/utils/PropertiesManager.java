@@ -1,4 +1,4 @@
-package com.solvd.AviaCompany.utils;
+package com.solvd.aviacompany.utils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertiesManager {
-    private String pathToProp;
+    private final String pathToProp;
     private Properties prop;
     private static final Logger logger = LogManager.getLogger(PropertiesManager.class);
-    private String defaultPath = "/src/main/resources/dbcreds.properties";
+    private final String defaultPath = "/src/main/resources/dbcreds.properties";
 
     public PropertiesManager() {
         pathToProp = System.getProperty("user.dir") + defaultPath;

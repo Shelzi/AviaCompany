@@ -1,20 +1,14 @@
-package com.solvd.AviaCompany.service.impl;
+package com.solvd.aviacompany.service.impl;
 
-import com.solvd.AviaCompany.db.dao.ITicketDAO;
-import com.solvd.AviaCompany.db.impl.TicketDAOImpl;
-import com.solvd.AviaCompany.hierarchy.Ticket;
-import com.solvd.AviaCompany.service.interfaces.TicketService;
+import com.solvd.aviacompany.db.dao.ITicketDAO;
+import com.solvd.aviacompany.db.impl.TicketDAOImpl;
+import com.solvd.aviacompany.hierarchy.Ticket;
+import com.solvd.aviacompany.service.interfaces.TicketService;
 
 import java.util.List;
 
 public class TicketServiceImpl implements TicketService {
-
-    private ITicketDAO iTicketDAO;
-
-    public TicketServiceImpl() {
-        this.iTicketDAO = new TicketDAOImpl();
-    }
-
+    private static final ITicketDAO iTicketDAO = new TicketDAOImpl();
 
     @Override
     public boolean addTicket(Ticket entity) {

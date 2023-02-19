@@ -1,6 +1,6 @@
-package com.solvd.AviaCompany.service.interfaces;
+package com.solvd.aviacompany.service.interfaces;
 
-import com.solvd.AviaCompany.hierarchy.City;
+import com.solvd.aviacompany.hierarchy.City;
 
 import java.util.List;
 import java.util.Optional;

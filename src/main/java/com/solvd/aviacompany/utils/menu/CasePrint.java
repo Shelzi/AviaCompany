@@ -1,17 +1,14 @@
-package com.solvd.AviaCompany.utils.menu;
+package com.solvd.aviacompany.utils.menu;
 
-import com.solvd.AviaCompany.db.dao.IBaseDAO;
+import com.solvd.aviacompany.db.dao.IBaseDAO;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Scanner;
 
 public class CasePrint {
-
     public MenuOptions print(Logger logger, Scanner sc, GetDao.AvailableOptions choice, GetDao getDAO) {
-         MenuOptions currentOption =  MenuOptions.ALL;
-
+        MenuOptions currentOption =  MenuOptions.ALL;
         IBaseDAO dao = getDAO.getDAO(sc);
-        choice = getDAO.getChoice();
         if (dao != null) {
             logger.info("""
                                 

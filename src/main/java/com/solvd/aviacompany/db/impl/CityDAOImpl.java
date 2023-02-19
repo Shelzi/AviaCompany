@@ -1,9 +1,9 @@
-package com.solvd.AviaCompany.db.impl;
+package com.solvd.aviacompany.db.impl;
 
-import com.solvd.AviaCompany.db.dao.ICityDAO;
-import com.solvd.AviaCompany.hierarchy.City;
-import com.solvd.AviaCompany.hierarchy.Country;
-import com.solvd.AviaCompany.utils.connection.JDBCConnectionManager;
+import com.solvd.aviacompany.db.dao.ICityDAO;
+import com.solvd.aviacompany.hierarchy.City;
+import com.solvd.aviacompany.hierarchy.Country;
+import com.solvd.aviacompany.utils.connection.JDBCConnectionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.solvd.AviaCompany.db.tablecolumns.CityColumn.*;
+import static com.solvd.aviacompany.db.tablecolumns.CityColumn.*;
 
 public class CityDAOImpl extends JDBCConnectionManager implements ICityDAO {
 

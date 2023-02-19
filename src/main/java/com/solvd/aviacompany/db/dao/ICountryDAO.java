@@ -1,6 +1,6 @@
-package com.solvd.AviaCompany.db.dao;
+package com.solvd.aviacompany.db.dao;
 
-import com.solvd.AviaCompany.hierarchy.Country;
+import com.solvd.aviacompany.hierarchy.Country;
 
 public interface ICountryDAO extends IBaseDAO<Integer, Country> {
     Country getCountryByName(String name);

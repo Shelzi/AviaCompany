@@ -1,7 +1,7 @@
-package com.solvd.AviaCompany.utils.menu;
+package com.solvd.aviacompany.utils.menu;
 
-import com.solvd.AviaCompany.hierarchy.*;
-import com.solvd.AviaCompany.service.impl.*;
+import com.solvd.aviacompany.hierarchy.*;
+import com.solvd.aviacompany.service.impl.*;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
@@ -127,7 +127,6 @@ public class CaseBookFlight {
                 String lname = ScannerGetter.getString(sc);
                 Passenger p = new Passenger(1, fname, lname);
                 List<Ticket> tickets = flightToBuy.getFlights(p);
-
             }
         }
         while (stillChoosing);

@@ -1,36 +1,30 @@
-package com.solvd.AviaCompany.service.impl;
+package com.solvd.aviacompany.service.impl;
 
-import com.solvd.AviaCompany.db.dao.IFlightDAO;
-import com.solvd.AviaCompany.db.impl.FlightDAOImpl;
-import com.solvd.AviaCompany.hierarchy.City;
-import com.solvd.AviaCompany.hierarchy.Country;
-import com.solvd.AviaCompany.hierarchy.Flight;
-import com.solvd.AviaCompany.service.interfaces.FlightService;
+import com.solvd.aviacompany.db.dao.IFlightDAO;
+import com.solvd.aviacompany.db.impl.FlightDAOImpl;
+import com.solvd.aviacompany.hierarchy.City;
+import com.solvd.aviacompany.hierarchy.Country;
+import com.solvd.aviacompany.hierarchy.Flight;
+import com.solvd.aviacompany.service.interfaces.FlightService;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 public class FlightServiceImpl implements FlightService {
 
-    private IFlightDAO iFlightDAO;
-
-    public FlightServiceImpl() {
-        this.iFlightDAO = new FlightDAOImpl();
-    }
-
+    private final IFlightDAO iFlightDAO = new FlightDAOImpl();
 
     @Override
     public List<Flight> getFlights() {
         //List<Flight> flightList = iFlightDAO.read();
         List<Flight> flightList = new ArrayList<>(List.of());
-        City Brest = new City(3, "Brest", new Country());
-        City Minsk = new City(1, "Minsk", new Country());
-        City Gomel = new City(2, "Gomel", new Country());
-        Flight f1 = new Flight(1, Minsk, Brest , 100, 1000);
-        Flight f2 = new Flight(2, Brest , Gomel, 200, 1200);
-        Flight f3 = new Flight(3, Gomel, Minsk, 300, 500);
+        City brest = new City(3, "brest", new Country());
+        City minsk = new City(1, "minsk", new Country());
+        City gomel = new City(2, "gomel", new Country());
+        Flight f1 = new Flight(1, minsk, brest , 100, 1000);
+        Flight f2 = new Flight(2, brest , gomel, 200, 1200);
+        Flight f3 = new Flight(3, gomel, minsk, 300, 500);
         flightList.add(f1);
         flightList.add(f2);
         flightList.add(f3);

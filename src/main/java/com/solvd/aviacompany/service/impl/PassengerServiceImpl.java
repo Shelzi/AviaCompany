@@ -1,9 +1,9 @@
-package com.solvd.AviaCompany.service.impl;
+package com.solvd.aviacompany.service.impl;
 
-import com.solvd.AviaCompany.db.dao.IPassengerDAO;
-import com.solvd.AviaCompany.db.impl.PassengerDAOImpl;
-import com.solvd.AviaCompany.hierarchy.Passenger;
-import com.solvd.AviaCompany.service.interfaces.PassengerService;
+import com.solvd.aviacompany.db.dao.IPassengerDAO;
+import com.solvd.aviacompany.db.impl.PassengerDAOImpl;
+import com.solvd.aviacompany.hierarchy.Passenger;
+import com.solvd.aviacompany.service.interfaces.PassengerService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,11 +14,7 @@ import java.util.Optional;
 public class PassengerServiceImpl implements PassengerService {
 
     private static final Logger logger = LogManager.getLogger(PassengerServiceImpl.class);
-    private IPassengerDAO iPassengerDAO;
-
-    public PassengerServiceImpl() {
-        this.iPassengerDAO = new PassengerDAOImpl();
-    }
+    private final IPassengerDAO iPassengerDAO = new PassengerDAOImpl();;
 
     public List<Passenger> getAllPassengers() {
         List<Passenger> passengerList = iPassengerDAO.read();

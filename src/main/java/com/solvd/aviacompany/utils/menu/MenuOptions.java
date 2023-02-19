@@ -1,4 +1,4 @@
-package com.solvd.AviaCompany.utils.menu;
+package com.solvd.aviacompany.utils.menu;
 
 public enum MenuOptions {
     ALL,

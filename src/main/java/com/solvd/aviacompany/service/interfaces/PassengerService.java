@@ -1,12 +1,11 @@
-package com.solvd.AviaCompany.service.interfaces;
+package com.solvd.aviacompany.service.interfaces;
 
-import com.solvd.AviaCompany.hierarchy.Passenger;
+import com.solvd.aviacompany.hierarchy.Passenger;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface PassengerService {
-
     List<Passenger> getAllPassengers();
 
     Optional<Passenger> getPassengerById(int id);

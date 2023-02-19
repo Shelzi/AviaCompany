@@ -1,48 +1,23 @@
-package com.solvd.AviaCompany.hierarchy;
+package com.solvd.aviacompany.hierarchy;
 
-import com.solvd.AviaCompany.service.impl.IntIntPair;
+import com.solvd.aviacompany.service.impl.IntIntPair;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ComplexRoute {
     private List<City> cities;
     private List<IntIntPair> weights;
 
-    @Override
-    public String toString() {
-        StringBuilder res = new StringBuilder();
-        for(int i = 0; i < cities.size(); i++){
-            res.append(cities.get(i).getName());
-            if(i != cities.size() - 1)
-                res.append(" -> ");
-        }
-        IntIntPair total = getTotalWeight();
-        res.append("\n      Cost: ").append(total.getA()).append(" $    Distance: ").append(total.getB()).append(" km");
-        return res.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ComplexRoute that = (ComplexRoute) o;
-        return Objects.equals(cities, that.cities) && Objects.equals(weights, that.weights);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(cities, weights);
-    }
-
     public List<Ticket> getFlights(Passenger passenger){
         if(cities.isEmpty())
-            return null;
+            return new ArrayList<>();
         List<Ticket> tickets = new ArrayList<>();
         for(int i = 0; i < cities.size() - 1; i++){
             Flight f = new Flight(0, cities.get(i), cities.get(i + 1), weights.get(i).getA(), weights.get(i).getB());
@@ -60,5 +35,18 @@ public class ComplexRoute {
             res.sumTwoPairs(w);
         }
         return res;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        for(int i = 0; i < cities.size(); i++){
+            res.append(cities.get(i).getName());
+            if(i != cities.size() - 1)
+                res.append(" -> ");
+        }
+        IntIntPair total = getTotalWeight();
+        res.append("\n      Cost: ").append(total.getA()).append(" $    Distance: ").append(total.getB()).append(" km");
+        return res.toString();
     }
 }

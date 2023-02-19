@@ -1,20 +1,21 @@
-package com.solvd.AviaCompany.service.impl;
+package com.solvd.aviacompany.service.impl;
 
-import com.solvd.AviaCompany.db.dao.ICityDAO;
-import com.solvd.AviaCompany.db.impl.CityDAOImpl;
-import com.solvd.AviaCompany.hierarchy.City;
-import com.solvd.AviaCompany.hierarchy.Flight;
-import com.solvd.AviaCompany.service.interfaces.CityService;
+import com.solvd.aviacompany.hierarchy.City;
+import com.solvd.aviacompany.hierarchy.Flight;
+import com.solvd.aviacompany.service.interfaces.CityService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Comparator;
 
 public class CityServiceImpl implements CityService {
 
-    private ICityDAO iCityDAO;
-    private List<City> cities = new ArrayList<>();
+    private final List<City> cities;
 
     public CityServiceImpl() {
-        this.iCityDAO = new CityDAOImpl();
         List<Flight> flights = new FlightServiceImpl().getFlights();
         Set<City> citiesSet = new HashSet<>();
         for(Flight f : flights) {

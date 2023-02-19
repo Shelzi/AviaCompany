@@ -1,7 +1,7 @@
-package com.solvd.AviaCompany.service.impl;
+package com.solvd.aviacompany.service.impl;
 
-import com.solvd.AviaCompany.hierarchy.City;
-import com.solvd.AviaCompany.hierarchy.Flight;
+import com.solvd.aviacompany.hierarchy.City;
+import com.solvd.aviacompany.hierarchy.Flight;
 
 import java.util.*;
 
@@ -41,17 +41,6 @@ public class FlightGraphService {
             int j = cityIndexMap.get(flight.getDestination());
             matrix[i][j] = flight.getDistance();
         }
-
-//        for (int i = 0; i < matrix.length; i++) {
-//            for (int j = 0; j < matrix[i].length; j++) {
-//                if (matrix[i][j] == Integer.MAX_VALUE / 2) {
-//                    System.out.printf("%-5s", "inf");
-//                } else {
-//                    System.out.printf("%-5d", matrix[i][j]);
-//                }
-//            }
-//            System.out.println();
-//        }
         return matrix;
     }
 }
