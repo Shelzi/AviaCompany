@@ -1,19 +1,23 @@
-package com.solvd.aviacompany.db.impl;
+package com.solvd.aviacompany.db.dao.impl;
 
 import com.solvd.aviacompany.db.dao.ICityDAO;
+import com.solvd.aviacompany.db.tablecolumns.CityColumn;
+import com.solvd.aviacompany.db.tablecolumns.CountryColumn;
 import com.solvd.aviacompany.hierarchy.City;
 import com.solvd.aviacompany.hierarchy.Country;
 import com.solvd.aviacompany.utils.connection.JDBCConnectionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.solvd.aviacompany.db.tablecolumns.CityColumn.*;
-
-public class CityDAOImpl extends JDBCConnectionManager implements ICityDAO {
+public class CityDaoImpl extends JDBCConnectionManager implements ICityDAO {
 
     private static final Logger logger = LogManager.getLogger(CityDAOImpl.class);
     private static final String GET_CITY_ID = "SELECT ci.id, ci.name, co.id as country_id, co.name as country_name " +
@@ -62,11 +66,11 @@ public class CityDAOImpl extends JDBCConnectionManager implements ICityDAO {
             ResultSet resultSet = statement.executeQuery(GET_ALL_CITIES);
             while (resultSet.next()) {
                 City city = new City();
-                city.setId(resultSet.getInt("city_" + ID.getColumn()));
-                city.setName(resultSet.getString("city_" + NAME.getColumn()));
+                city.setId(resultSet.getInt("city_" + CityColumn.ID.toString()));
+                city.setName(resultSet.getString("city_" + CityColumn.NAME.toString()));
                 Country country = new Country();
-                country.setId(resultSet.getInt("country_" + ID.getColumn()));
-                country.setName(resultSet.getString("country_" + NAME.getColumn()));
+                country.setId(resultSet.getInt("country_" + CountryColumn.ID.toString()));
+                country.setName(resultSet.getString("country_" + CountryColumn.NAME.toString()));
                 city.setCountry(country);
                 cityList.add(city);
             }

@@ -1,4 +1,4 @@
-package com.solvd.aviacompany.db.impl;
+package com.solvd.aviacompany.db.dao.impl;
 
 import com.solvd.aviacompany.db.dao.IFlightDAO;
 import com.solvd.aviacompany.db.tablecolumns.CityColumn;
@@ -11,13 +11,13 @@ import com.solvd.aviacompany.utils.connection.JDBCConnectionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.*;
+import java.sql. ;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.solvd.aviacompany.db.tablecolumns.TicketColumn.FLIGHT;
 
-public class FlightDAOImpl extends JDBCConnectionManager implements IFlightDAO {
+public class FlightDaoImpl extends JDBCConnectionManager implements IFlightDAO {
 
     private static final Logger logger = LogManager.getLogger(FlightDAOImpl.class);
 

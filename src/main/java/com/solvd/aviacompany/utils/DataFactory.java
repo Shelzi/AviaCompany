@@ -1,8 +1,8 @@
 package com.solvd.aviacompany.utils;
 
-import com.solvd.aviacompany.db.impl.CityDAOImpl;
-import com.solvd.aviacompany.db.impl.CountryDAOImpl;
-import com.solvd.aviacompany.db.impl.FlightDAOImpl;
+import com.solvd.aviacompany.db.dao.impl.CityDAOImpl;
+import com.solvd.aviacompany.db.dao.impl.CountryDAOImpl;
+import com.solvd.aviacompany.db.dao.impl.FlightDAOImpl;
 import com.solvd.aviacompany.hierarchy.City;
 import com.solvd.aviacompany.hierarchy.Country;
 import com.solvd.aviacompany.hierarchy.Flight;
@@ -85,8 +85,8 @@ public class DataFactory {
             int i2;
             Random random = new Random();
             do {
-                i1 = random.nextInt(14);
-                i2 = random.nextInt(14);
+                i1 = random.nextInt(1, 15);
+                i2 = random.nextInt(1, 15);
                 String pair = Integer.toString(i1) + i2;
                 if ((i1 != i2) && (!listOfPairs.contains(pair))) {
                     flight.setDeparture(cityDAO.read(i1));

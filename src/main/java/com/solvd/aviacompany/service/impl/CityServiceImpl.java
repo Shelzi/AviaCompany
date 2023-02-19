@@ -2,7 +2,7 @@ package com.solvd.aviacompany.service.impl;
 
 import com.solvd.aviacompany.hierarchy.City;
 import com.solvd.aviacompany.hierarchy.Flight;
-import com.solvd.aviacompany.service.interfaces.CityService;
+import com.solvd.aviacompany.service.CityService;
 
 import java.util.ArrayList;
 import java.util.List;

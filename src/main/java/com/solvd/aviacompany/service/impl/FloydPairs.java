@@ -1,6 +1,6 @@
 package com.solvd.aviacompany.service.impl;
 
-import com.solvd.aviacompany.service.interfaces.CityService;
+import com.solvd.aviacompany.service.CityService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

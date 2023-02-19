@@ -1,9 +1,9 @@
 package com.solvd.aviacompany.service.impl;
 
 import com.solvd.aviacompany.db.dao.ITicketDAO;
-import com.solvd.aviacompany.db.impl.TicketDAOImpl;
+import com.solvd.aviacompany.db.dao.impl.TicketDAOImpl;
 import com.solvd.aviacompany.hierarchy.Ticket;
-import com.solvd.aviacompany.service.interfaces.TicketService;
+import com.solvd.aviacompany.service.TicketService;
 
 import java.util.List;
 

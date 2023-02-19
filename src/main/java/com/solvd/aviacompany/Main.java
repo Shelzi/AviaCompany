@@ -1,14 +1,15 @@
 package com.solvd.aviacompany;
 
-import com.solvd.aviacompany.utils.menu.*;
+import com.solvd.aviacompany.db.dao.pool.ConnectionPool;
+import com.solvd.aviacompany.utils.DataFactory;
+import com.solvd.aviacompany.utils.menu.MenuService;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println((Math.random() * 13 + 1));
-        //new DataFactory().createData();
-
-/*        MenuService menuService = new MenuService();
-        menuService.menu();*/
+        ConnectionPool.getInstance().init();
+        new DataFactory().createData();
+        MenuService menuService = new MenuService();
+        menuService.menu();
 //        ArrayList<Flight> flights = new ArrayList<>();
 //        City Brest = new City(2, "Brest", new Country());
 //        City Minsk = new City(1, "Minsk", new Country());

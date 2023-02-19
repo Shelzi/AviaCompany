@@ -1,11 +1,11 @@
 package com.solvd.aviacompany.service.impl;
 
 import com.solvd.aviacompany.db.dao.IFlightDAO;
-import com.solvd.aviacompany.db.impl.FlightDAOImpl;
+import com.solvd.aviacompany.db.dao.impl.FlightDAOImpl;
 import com.solvd.aviacompany.hierarchy.City;
 import com.solvd.aviacompany.hierarchy.Country;
 import com.solvd.aviacompany.hierarchy.Flight;
-import com.solvd.aviacompany.service.interfaces.FlightService;
+import com.solvd.aviacompany.service.FlightService;
 
 import java.util.ArrayList;
 import java.util.List;

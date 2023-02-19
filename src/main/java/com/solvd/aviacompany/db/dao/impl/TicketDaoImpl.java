@@ -1,22 +1,21 @@
-package com.solvd.aviacompany.db.impl;
+package com.solvd.aviacompany.db.dao.impl;
 
 import com.solvd.aviacompany.db.dao.ITicketDAO;
 import com.solvd.aviacompany.db.tablecolumns.CityColumn;
 import com.solvd.aviacompany.db.tablecolumns.CountryColumn;
 import com.solvd.aviacompany.db.tablecolumns.FlightColumn;
-import com.solvd.aviacompany.db.tablecolumns.PassengerColumn;
-import com.solvd.aviacompany.hierarchy.*;
-import com.solvd.aviacompany.utils.connection.JDBCConnectionManager;
+import com.solvd.aviacompany.db.tablecolumns.Passengers;
+import com.solvd.aviacompany.hierarchy. ;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.*;
+import java.sql. ;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.solvd.aviacompany.db.tablecolumns.TicketColumn.*;
+import static com.solvd.aviacompany.db.tablecolumns.TicketColumn. ;
 
-public class TicketDAOImpl extends JDBCConnectionManager implements ITicketDAO {
+public class TicketDaoImpl implements ITicketDAO {
 
     private static final Logger logger = LogManager.getLogger(TicketDAOImpl.class);
     private static final String INSERT_TICKET = "INSERT INTO Tickets(passengers_id, flights_id) VALUES(?, ?)";
@@ -73,9 +72,9 @@ public class TicketDAOImpl extends JDBCConnectionManager implements ITicketDAO {
                 Country departureCountry = new Country();
                 Country destinationCountry = new Country();
 
-                passenger.setId(resultSet.getInt(PASSENGER.getColumn()));
-                passenger.setFirstName(resultSet.getString(PassengerColumn.FIRST_NAME.getColumn()));
-                passenger.setLastName(resultSet.getString(PassengerColumn.LAST_NAME.getColumn()));
+                passenger.setId(resultSet.getInt(PASSENGERS_ID.getColumn()));
+                passenger.setFirstName(resultSet.getString(Passengers.FIRST_NAME.getColumn()));
+                passenger.setLastName(resultSet.getString(Passengers.LAST_NAME.getColumn()));
 
                 flight.setId(resultSet.getInt(FLIGHT.getColumn()));
                 flight.setDistance(resultSet.getInt(FlightColumn.DISTANCE.getColumn()));

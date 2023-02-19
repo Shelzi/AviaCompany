@@ -3,7 +3,9 @@ package com.solvd.aviacompany.service.impl;
 import com.solvd.aviacompany.hierarchy.City;
 import com.solvd.aviacompany.hierarchy.Flight;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FlightGraphService {
 

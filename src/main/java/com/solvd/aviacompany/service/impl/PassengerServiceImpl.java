@@ -1,9 +1,9 @@
 package com.solvd.aviacompany.service.impl;
 
 import com.solvd.aviacompany.db.dao.IPassengerDAO;
-import com.solvd.aviacompany.db.impl.PassengerDAOImpl;
+import com.solvd.aviacompany.db.dao.impl.PassengerDAOImpl;
 import com.solvd.aviacompany.hierarchy.Passenger;
-import com.solvd.aviacompany.service.interfaces.PassengerService;
+import com.solvd.aviacompany.service.PassengerService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

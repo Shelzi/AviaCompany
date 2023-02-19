@@ -1,4 +1,4 @@
-package com.solvd.aviacompany.service.interfaces;
+package com.solvd.aviacompany.service;
 
 import com.solvd.aviacompany.hierarchy.City;
 
