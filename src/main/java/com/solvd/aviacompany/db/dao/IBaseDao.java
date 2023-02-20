@@ -3,7 +3,7 @@ package com.solvd.aviacompany.db.dao;
 import java.util.List;
 import java.util.Optional;
 
-public interface IBaseDAO<T> {
+public interface IBaseDao<T> {
     boolean create(T entity);
     List<T> read();
     boolean update(T entity);

@@ -4,6 +4,6 @@ import com.solvd.aviacompany.hierarchy.Country;
 
 import java.util.Optional;
 
-public interface ICountryDAO extends IBaseDAO<Country> {
+public interface ICountryDao extends IBaseDao<Country> {
     Optional<Country> getCountryByName(String name);
 }

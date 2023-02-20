@@ -19,7 +19,6 @@ public class ConnectionCreator {
     private static final String DATABASE_URL_FIELD = "db.url";
     private static final String DATABASE_POOL_SIZE_FIELD = "pool.size";
     private static final String POOL_SIZE;
-
     private static final Logger logger = LogManager.getLogger();
 
     static {

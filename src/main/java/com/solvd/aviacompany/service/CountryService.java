@@ -14,5 +14,5 @@ public interface CountryService {
 
     boolean addCountry(Country country);
 
-    Optional<Country> updateCountry(Country country);
+    boolean updateCountry(Country country);
 }

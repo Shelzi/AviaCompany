@@ -20,9 +20,12 @@ public class ComplexRoute {
             return new ArrayList<>();
         List<Ticket> tickets = new ArrayList<>();
         for(int i = 0; i < cities.size() - 1; i++){
-            Flight f = new Flight(0, cities.get(i), cities.get(i + 1), weights.get(i).getA(), weights.get(i).getB());
-            Ticket t = new Ticket(passenger, f);
-            tickets.add(t);
+            Flight flight = new Flight(0, cities.get(i), cities.get(i + 1), weights.get(i).getA(), weights.get(i).getB());
+            Ticket ticket = Ticket.builder()
+                    .passenger(passenger)
+                    .flight(flight)
+                    .build();
+            tickets.add(ticket);
         }
         return tickets;
     }

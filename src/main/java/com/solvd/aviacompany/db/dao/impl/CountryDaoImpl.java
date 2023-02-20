@@ -1,6 +1,6 @@
 package com.solvd.aviacompany.db.dao.impl;
 
-import com.solvd.aviacompany.db.dao.ICountryDAO;
+import com.solvd.aviacompany.db.dao.ICountryDao;
 import com.solvd.aviacompany.db.dao.constant.SqlQuery;
 import com.solvd.aviacompany.db.dao.mapper.BaseMapper;
 import com.solvd.aviacompany.db.dao.mapper.impl.CountryMapper;
@@ -17,17 +17,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class CountryDaoImpl implements ICountryDAO {
+public class CountryDaoImpl implements ICountryDao {
     private static final Logger logger = LogManager.getLogger(CountryDaoImpl.class);
     private static final ConnectionPool pool = ConnectionPool.getInstance();
 
     private static final BaseMapper<Country> countryMapper = new CountryMapper();
 
     @Override
-    public boolean create(Country entity) {
+    public boolean create(Country country) {
         try (Connection c = pool.takeConnection();
              PreparedStatement preparedStatement = c.prepareStatement(SqlQuery.SQL_INSERT_COUNTRY)) {
-            preparedStatement.setString(1, entity.getName());
+            preparedStatement.setInt(1, country.getId());
+            preparedStatement.setString(2, country.getName());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 0) {
                 logger.warn("No rows were inserted");
@@ -43,7 +44,7 @@ public class CountryDaoImpl implements ICountryDAO {
     public List<Country> read() {
         List<Country> countryList = new ArrayList<>();
         try (Connection c = pool.takeConnection();
-             PreparedStatement preparedStatement = c.prepareStatement(SqlQuery.SQL_UPDATE_PASSENGER)) {
+             PreparedStatement preparedStatement = c.prepareStatement(SqlQuery.SQL_GET_ALL_COUNTRIES)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 countryList.add(countryMapper.map(resultSet));
@@ -105,7 +106,7 @@ public class CountryDaoImpl implements ICountryDAO {
     }
 
     @Override
-    public boolean delete(Country entity) {
+    public boolean delete(Country country) {
         return false;
     }
 }

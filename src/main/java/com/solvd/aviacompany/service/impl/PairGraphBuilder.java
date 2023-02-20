@@ -11,7 +11,9 @@ import java.util.TreeMap;
 public class PairGraphBuilder {
     private static final IntIntPair INF = new IntIntPair(Integer.MAX_VALUE / 2, Integer.MAX_VALUE / 2);
 
-    public IntIntPair[][] getMatrixFromList(List<Flight> flightList) {
+    public IntIntPair[][] getMatrixFromList(List<Flight> flightList,
+                                            Map<String, Integer> cityNameToIndexMap,
+                                            Map<Integer, City> cityIndextoCityMap) {
         // Create a map from city IDs to city objects
         Map<Integer, City> cityMap = new TreeMap<>();
         for (Flight flight : flightList) {
@@ -20,10 +22,14 @@ public class PairGraphBuilder {
         }
 
         // Create a map from city objects to their indices in the matrix
-        Map<City, Integer> cityIndexMap = new LinkedHashMap<>();
+
         int index = 0;
+        Map<City, Integer> cityIndexMap = new LinkedHashMap<>();
         for (City city : cityMap.values()) {
-            cityIndexMap.put(city, index++);
+            cityIndexMap.put(city, index);
+            cityIndextoCityMap.put(index, city);
+            cityNameToIndexMap.put(city.getName(), index);
+            index++;
         }
 
         // Create the distance matrix

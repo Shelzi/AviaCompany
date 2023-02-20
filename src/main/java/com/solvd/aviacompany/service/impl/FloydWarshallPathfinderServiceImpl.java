@@ -67,6 +67,10 @@ public class FloydWarshallPathfinderServiceImpl implements PathfinderService {
         FloydWarshallPathfinderServiceImpl.printShortestPath(path, 3, 2);
     }
 
+    public static void main(String[] args) {
+        new FloydWarshallPathfinderServiceImpl().testCase();
+    }
+
     public static void printShortestPath(List<Integer> path, int src, int dest) {
         if (path.isEmpty()) {
             logger.info("There is no path between " + src + " and " + dest);

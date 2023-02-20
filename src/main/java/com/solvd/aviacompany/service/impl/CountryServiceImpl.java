@@ -1,7 +1,8 @@
 package com.solvd.aviacompany.service.impl;
 
-import com.solvd.aviacompany.db.dao.ICountryDAO;
+import com.solvd.aviacompany.db.dao.ICountryDao;
 import com.solvd.aviacompany.db.dao.impl.CountryDaoImpl;
+
 import com.solvd.aviacompany.hierarchy.Country;
 import com.solvd.aviacompany.service.CountryService;
 import org.apache.logging.log4j.LogManager;
@@ -13,37 +14,28 @@ import java.util.Optional;
 
 public class CountryServiceImpl implements CountryService {
 
-    private static final Logger logger = LogManager.getLogger(CountryServiceImpl.class);
-    private final ICountryDAO iCountryDAO;
-
-    public CountryServiceImpl() {
-        this.iCountryDAO = new CountryDaoImpl();
-    }
+    private static final Logger logger = LogManager.getLogger();
+    private final ICountryDao iCountryDao = new CountryDaoImpl();
 
     public List<Country> getAllCountries() {
-        List<Country> countryList = iCountryDAO.read();
+        List<Country> countryList = iCountryDao.read();
         countryList.sort(Comparator.comparingInt(Country::getId));
         return countryList;
     }
 
     public Optional<Country> getCountryById(int id) {
-        return Optional.ofNullable(iCountryDAO.read(id));
+        return iCountryDao.read(id);
     }
 
     public Optional<Country> getCountryByName(String name) {
-        return Optional.ofNullable(iCountryDAO.getCountryByName(name));
+        return iCountryDao.getCountryByName(name);
     }
 
     public boolean addCountry(Country country) {
-        return iCountryDAO.create(country);
+        return iCountryDao.create(country);
     }
 
-    public Optional<Country> updateCountry(Country country) {
-        Country updatedCountry = iCountryDAO.update(country);
-        if (updatedCountry == null) {
-            return Optional.empty();
-        } else {
-            return Optional.of(updatedCountry);
-        }
+    public boolean updateCountry(Country country) {
+        return iCountryDao.update(country);
     }
 }

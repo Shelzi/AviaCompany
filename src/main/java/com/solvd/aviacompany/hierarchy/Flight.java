@@ -1,12 +1,14 @@
 package com.solvd.aviacompany.hierarchy;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Flight {
     private int id;
     private City departure;

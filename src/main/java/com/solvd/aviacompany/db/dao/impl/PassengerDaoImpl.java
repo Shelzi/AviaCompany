@@ -1,6 +1,6 @@
 package com.solvd.aviacompany.db.dao.impl;
 
-import com.solvd.aviacompany.db.dao.IPassengerDAO;
+import com.solvd.aviacompany.db.dao.IPassengerDao;
 import com.solvd.aviacompany.db.dao.constant.SqlQuery;
 import com.solvd.aviacompany.db.dao.mapper.BaseMapper;
 import com.solvd.aviacompany.db.dao.mapper.impl.PassengerMapper;
@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class PassengerDaoImpl implements IPassengerDAO {
+public class PassengerDaoImpl implements IPassengerDao {
 
-    private static final Logger logger = LogManager.getLogger(PassengerDAOImpl.class);
+    private static final Logger logger = LogManager.getLogger();
     private static final ConnectionPool pool = ConnectionPool.getInstance();
     private static final BaseMapper<Passenger> passengerMapper = new PassengerMapper();
 
@@ -73,12 +73,12 @@ public class PassengerDaoImpl implements IPassengerDAO {
     }
 
     @Override
-    public boolean update(Passenger entity) {
+    public boolean update(Passenger passenger) {
         try (Connection c = pool.takeConnection();
              PreparedStatement preparedStatement = c.prepareStatement(SqlQuery.SQL_UPDATE_PASSENGER)) {
-            preparedStatement.setString(1, entity.getFirstName());
-            preparedStatement.setString(2, entity.getLastName());
-            preparedStatement.setInt(3, entity.getId());
+            preparedStatement.setString(1, passenger.getFirstName());
+            preparedStatement.setString(2, passenger.getLastName());
+            preparedStatement.setInt(3, passenger.getId());
             return (preparedStatement.executeUpdate() == 1);
         } catch (SQLException e) {
             logger.warn("Wrong statement  / Invalid field");
@@ -110,7 +110,7 @@ public class PassengerDaoImpl implements IPassengerDAO {
     }
 
     @Override
-    public boolean delete(Passenger entity) {
+    public boolean delete(Passenger passenger) {
         return false;
     }
 }

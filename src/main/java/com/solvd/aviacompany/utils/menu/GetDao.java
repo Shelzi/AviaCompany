@@ -1,6 +1,6 @@
 package com.solvd.aviacompany.utils.menu;
 
-import com.solvd.aviacompany.db.dao.IBaseDAO;
+import com.solvd.aviacompany.db.dao.IBaseDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +22,7 @@ public class GetDao {
         return choice;
     }
 
-    public IBaseDAO getDAO(Scanner sc) {
+    public IBaseDao getDao(Scanner sc) {
         logger.info("""
                                 
                 (1)  * AIRPORTS
@@ -33,7 +33,7 @@ public class GetDao {
 
                 (0)  * BACK
                 """);
-        IBaseDAO dao = null;
+        IBaseDao dao = null;
         int k = -1;
         boolean validInt = false;
         do {
@@ -47,23 +47,23 @@ public class GetDao {
         } while (!validInt || k < 0 || k > 5);
         switch (k) {
             case 1 -> {
-                //dao = new AirportDAO();
+                //dao = new AirportDao();
                 choice = AvailableOptions.AIRPORTS;
             }
             case 2 -> {
-                //dao = (myBatis) ? new FlightService() : new FlightDAO();
+                //dao = (myBatis) ? new FlightService() : new FlightDao();
                 choice = AvailableOptions.FLIGHTS;
             }
             case 3 -> {
-                //dao = (myBatis) ? new PilotService() : new PilotDAO();
+                //dao = (myBatis) ? new PilotService() : new PilotDao();
                 choice = AvailableOptions.PILOTS;
             }
             case 4 -> {
-                //dao = (myBatis) ? new PlaneService() : new PlaneDAO();
+                //dao = (myBatis) ? new PlaneService() : new PlaneDao();
                 choice = AvailableOptions.PLANES;
             }
             case 5 -> {
-                //dao = (myBatis) ? new TicketService() : new TicketDAO();
+                //dao = (myBatis) ? new TicketService() : new TicketDao();
                 choice = AvailableOptions.TICKETS;
             }
 

@@ -4,6 +4,6 @@ import com.solvd.aviacompany.hierarchy.Passenger;
 
 import java.util.Optional;
 
-public interface IPassengerDAO extends IBaseDAO<Passenger> {
+public interface IPassengerDao extends IBaseDao<Passenger> {
     Optional<Passenger> getPassengerByFirstAndLastName(String firstName, String lastName);
 }

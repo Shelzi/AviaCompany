@@ -34,15 +34,14 @@ public class ConnectionPool {
                 ProxyConnection proxyConnection = new ProxyConnection(connection);
                 idleConnections.add(proxyConnection);
             } catch (SQLException e) {
-                //logger.log(Level.ERROR, "Connection hasn't been created" + e);
+                logger.log(Level.ERROR, "Connection hasn't been created" + e);
                 errorCounter++;
             }
         }
         if (errorCounter >= MAX_CONNECTION_ERROR_NUMBER) {
-            //logger.log(Level.FATAL, errorCounter + " connections haven't been created");
+            logger.log(Level.FATAL, errorCounter + " connections haven't been created");
             throw new RuntimeException(errorCounter + " connections haven't been created");
         }
-
     }
 
     public void releaseConnection(ProxyConnection proxyConnection) {
@@ -71,7 +70,6 @@ public class ConnectionPool {
                 logger.log(Level.ERROR, "Сan't close connection: " + e);
                 throw new RuntimeException(e);
             }
-
             try {
                 while (DriverManager.getDrivers().hasMoreElements()) {
                     Driver driver = DriverManager.getDrivers().nextElement();

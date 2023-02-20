@@ -17,7 +17,6 @@ public class FloydPairs {
 
     public List<Integer> findPath(IntIntPair[][] graph, int src, int dest, boolean a, List<IntIntPair> weights){
         weights.clear();
-
         int V = graph.length;
         IntIntPair[][] dist = new IntIntPair[V][V];
         int[][] next = new int[V][V];
@@ -67,8 +66,6 @@ public class FloydPairs {
         }
         return path;
     }
-
-
 
     public static void printShortestPath(List<Integer> path, List<IntIntPair> weights, int src, int dest) {
         if (path.isEmpty()) {

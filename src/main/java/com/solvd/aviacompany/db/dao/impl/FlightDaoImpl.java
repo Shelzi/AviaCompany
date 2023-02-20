@@ -1,174 +1,100 @@
 package com.solvd.aviacompany.db.dao.impl;
 
-import com.solvd.aviacompany.db.dao.IFlightDAO;
-import com.solvd.aviacompany.db.tablecolumns.CityColumn;
-import com.solvd.aviacompany.db.tablecolumns.CountryColumn;
-import com.solvd.aviacompany.db.tablecolumns.FlightColumn;
+import com.solvd.aviacompany.db.dao.IFlightDao;
+import com.solvd.aviacompany.db.dao.constant.SqlQuery;
+import com.solvd.aviacompany.db.dao.mapper.BaseMapper;
+import com.solvd.aviacompany.db.dao.mapper.impl.FlightMapper;
+import com.solvd.aviacompany.db.dao.pool.ConnectionPool;
 import com.solvd.aviacompany.hierarchy.City;
-import com.solvd.aviacompany.hierarchy.Country;
 import com.solvd.aviacompany.hierarchy.Flight;
-import com.solvd.aviacompany.utils.connection.JDBCConnectionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql. ;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import static com.solvd.aviacompany.db.tablecolumns.TicketColumn.FLIGHT;
 
-public class FlightDaoImpl extends JDBCConnectionManager implements IFlightDAO {
-
-    private static final Logger logger = LogManager.getLogger(FlightDAOImpl.class);
-
-    private static final String GET_ALL_FLIGHTS = "SELECT f.id as flights_id, f.cost, f.distance, " +
-            "dep_city.name as dep_name, dep_city.id as dep_id, " +
-            "dest_city.name as dest_name, dest_city.id as dest_id, " +
-            "dep_co.id as dep_country_id, dep_co.name as dep_country_name, " +
-            "dest_co.id as dest_country_id, dest_co.name as dest_country_name " +
-            "FROM Flights f LEFT JOIN city dep_city ON f.dep_city_id = dep_city.id " +
-            "LEFT JOIN city dest_city ON f.dest_city_id = dest_city.id " +
-            "LEFT JOIN country dep_co ON dep_city.country_id = dep_co.id " +
-            "LEFT JOIN country dest_co ON dest_city.country_id = dest_co.id";
-    private static final String INSERT_FLIGHT = "INSERT INTO Flights(dep_city_id," +
-            "dest_city_id, cost, distance) VALUES(?,?,?,?)";
-
-    private static final String GET_FLIGHT_ID = GET_ALL_FLIGHTS + " WHERE f.id = ?";
+public class FlightDaoImpl implements IFlightDao {
+    private static final Logger logger = LogManager.getLogger();
+    private static final ConnectionPool pool = ConnectionPool.getInstance();
+    private static final BaseMapper<Flight> flightMapper = new FlightMapper();
 
     @Override
-    public boolean create(Flight entity) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            connection = getConnection();
-            preparedStatement = connection.prepareStatement(INSERT_FLIGHT);
-            preparedStatement.setInt(1, entity.getDeparture().getId());
-            preparedStatement.setInt(2, entity.getDestination().getId());
-            preparedStatement.setInt(3, entity.getCost());
-            preparedStatement.setInt(4, entity.getDistance());
+    public boolean create(Flight flight) {
+        try (Connection c = pool.takeConnection();
+             PreparedStatement preparedStatement = c.prepareStatement(SqlQuery.SQL_INSERT_FLIGHT)) {
+            preparedStatement.setInt(1, flight.getDeparture().getId());
+            preparedStatement.setInt(2, flight.getDestination().getId());
+            preparedStatement.setInt(3, flight.getCost());
+            preparedStatement.setInt(4, flight.getDistance());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 0) {
                 logger.warn("No rows were inserted");
                 return false;
             }
         } catch (SQLException e) {
-            logger.warn("Wrong statement  / Invalid field");
-        } finally {
-            close(preparedStatement);
-            close(connection);
+            logger.warn("Wrong statement / Invalid field");
         }
         return true;
     }
 
     @Override
     public List<Flight> read() {
-        Connection connection = null;
-        Statement statement = null;
         List<Flight> flightList = new ArrayList<>();
-        try {
-            connection = getConnection();
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(GET_ALL_FLIGHTS);
+        try (Connection c = pool.takeConnection();
+             PreparedStatement preparedStatement = c.prepareStatement(SqlQuery.SQL_GET_ALL_FLIGHTS)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Flight flight = new Flight();
-                City departureCity = new City();
-                City destinationCity = new City();
-                Country departureCountry = new Country();
-                Country destinationCountry = new Country();
-
-                flight.setId(resultSet.getInt(FLIGHT.getColumn()));
-                flight.setDistance(resultSet.getInt(FlightColumn.DISTANCE.getColumn()));
-                flight.setCost(resultSet.getInt(FlightColumn.COST.getColumn()));
-
-                departureCity.setId(resultSet.getInt("dep_" + CityColumn.ID.getColumn()));
-                departureCity.setName(resultSet.getString("dep_" + CityColumn.NAME.getColumn()));
-
-                destinationCity.setId(resultSet.getInt("dest_" + CityColumn.ID.getColumn()));
-                destinationCity.setName(resultSet.getString("dest_" + CityColumn.NAME.getColumn()));
-
-                departureCountry.setId(resultSet.getInt("dep_country_" + CountryColumn.ID.getColumn()));
-                departureCountry.setName(resultSet.getString("dep_country_" + CountryColumn.NAME.getColumn()));
-
-                destinationCountry.setId(resultSet.getInt("dest_country_" + CountryColumn.ID.getColumn()));
-                destinationCountry.setName(resultSet.getString("dest_country_" + CountryColumn.NAME.getColumn()));
-
-                departureCity.setCountry(departureCountry);
-                destinationCity.setCountry(destinationCountry);
-
-                flight.setDeparture(departureCity);
-                flight.setDestination(destinationCity);
+                Flight flight = Flight.builder()
+                        .destination(new CityDaoImpl().read(resultSet.getInt("flights.dest_city_id")).get())
+                        .departure(new CityDaoImpl().read(resultSet.getInt("flights.dep_city_id")).get())
+                        .id(resultSet.getInt("flights.id"))
+                        .cost(resultSet.getInt("flights.cost"))
+                        .distance(resultSet.getInt("flights.distance"))
+                        .build();
                 flightList.add(flight);
+                //TODO: rewrite to normal mapper, this is bad realisation of Dao read() method. Maybe do building in service
+                //flightList.add(flightMapper.map(resultSet));
             }
         } catch (SQLException e) {
             logger.warn("Wrong statement / Invalid field");
-        } finally {
-            close(statement);
-            close(connection);
         }
         return flightList;
     }
 
     @Override
-    public Flight update(Flight entity) {
-        return entity;
-    }
-
-    @Override
-    public Flight read(Integer id) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            connection = getConnection();
-            preparedStatement = connection.prepareStatement(GET_FLIGHT_ID);
+    public Optional<Flight> read(int id) {
+        Optional<Flight> flightOptional = Optional.empty();
+        try (Connection c = pool.takeConnection();
+             PreparedStatement preparedStatement = c.prepareStatement(SqlQuery.SQL_GET_FLIGHT_BY_ID)) {
             preparedStatement.setInt(1, id);
-
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                Flight flight = new Flight();
-                City departureCity = new City();
-                City destinationCity = new City();
-                Country departureCountry = new Country();
-                Country destinationCountry = new Country();
-
-                flight.setId(resultSet.getInt(FLIGHT.getColumn()));
-                flight.setDistance(resultSet.getInt(FlightColumn.DISTANCE.getColumn()));
-                flight.setCost(resultSet.getInt(FlightColumn.COST.getColumn()));
-
-                departureCity.setId(resultSet.getInt("dep_" + CityColumn.ID.getColumn()));
-                departureCity.setName(resultSet.getString("dep_" + CityColumn.NAME.getColumn()));
-
-                destinationCity.setId(resultSet.getInt("dest_" + CityColumn.ID.getColumn()));
-                destinationCity.setName(resultSet.getString("dest_" + CityColumn.NAME.getColumn()));
-
-                departureCountry.setId(resultSet.getInt("dep_country_" + CountryColumn.ID.getColumn()));
-                departureCountry.setName(resultSet.getString("dep_country_" + CountryColumn.NAME.getColumn()));
-
-                destinationCountry.setId(resultSet.getInt("dest_country_" + CountryColumn.ID.getColumn()));
-                destinationCountry.setName(resultSet.getString("dest_country_" + CountryColumn.NAME.getColumn()));
-
-                departureCity.setCountry(departureCountry);
-                destinationCity.setCountry(destinationCountry);
-
-                flight.setDeparture(departureCity);
-                flight.setDestination(destinationCity);
-                return flight;
+                flightOptional = Optional.of(flightMapper.map(resultSet));
             }
         } catch (SQLException e) {
-            logger.warn("Wrong statement  / Invalid field");
-        } finally {
-            close(preparedStatement);
-            close(connection);
+            logger.warn("Wrong statement / Invalid field");
         }
-        return null;
+        return flightOptional;
     }
 
     @Override
-    public boolean delete(Integer id) {
+    public boolean update(Flight flight) {
+        return false;
+
+    }
+    @Override
+    public boolean delete(int id) {
         return false;
     }
 
     @Override
-    public boolean delete(Flight entity) {
+    public boolean delete(Flight flight) {
         return false;
     }
 }

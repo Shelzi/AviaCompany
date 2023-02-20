@@ -1,13 +1,12 @@
 package com.solvd.aviacompany;
 
 import com.solvd.aviacompany.db.dao.pool.ConnectionPool;
-import com.solvd.aviacompany.utils.DataFactory;
 import com.solvd.aviacompany.utils.menu.MenuService;
 
 public class Main {
     public static void main(String[] args) {
         ConnectionPool.getInstance().init();
-        new DataFactory().createData();
+        //new DataFactory().createData(); //Генератор один раз отработал, больше его запускать не нужно.
         MenuService menuService = new MenuService();
         menuService.menu();
 //        ArrayList<Flight> flights = new ArrayList<>();

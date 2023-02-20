@@ -14,5 +14,5 @@ public interface PassengerService {
 
     boolean addPassenger(Passenger passenger);
 
-    Optional<Passenger> updatePassenger(Passenger passenger);
+    boolean updatePassenger(Passenger passenger);
 }
