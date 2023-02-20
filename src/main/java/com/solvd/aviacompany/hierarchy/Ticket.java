@@ -13,4 +13,11 @@ public class Ticket {
     private int id;
     private Passenger passenger;
     private Flight flight;
+
+    @Override
+    public String toString() {
+        return "Ticket id=" + id +
+                ". " + passenger +
+                ". " + flight;
+    }
 }
