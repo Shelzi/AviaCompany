@@ -5,7 +5,6 @@ import com.solvd.aviacompany.db.dao.constant.SqlQuery;
 import com.solvd.aviacompany.db.dao.mapper.BaseMapper;
 import com.solvd.aviacompany.db.dao.mapper.impl.FlightMapper;
 import com.solvd.aviacompany.db.dao.pool.ConnectionPool;
-import com.solvd.aviacompany.hierarchy.City;
 import com.solvd.aviacompany.hierarchy.Flight;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
