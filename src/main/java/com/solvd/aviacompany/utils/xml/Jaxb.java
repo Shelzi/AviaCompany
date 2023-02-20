@@ -13,7 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-public class jaxb {
+public class Jaxb {
     private static final Logger LOGGER = LogManager.getLogger();
 
     public static void main(String[] args) throws JAXBException, IOException {

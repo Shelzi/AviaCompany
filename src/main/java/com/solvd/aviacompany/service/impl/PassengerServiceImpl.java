@@ -33,4 +33,8 @@ public class PassengerServiceImpl implements PassengerService {
     public boolean updatePassenger(Passenger passenger) {
         return iPassengerDao.update(passenger);
     }
+
+    public int getAutoIncrement() {
+        return iPassengerDao.getAutoIncrement();
+    }
 }

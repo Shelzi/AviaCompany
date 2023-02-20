@@ -1,6 +1,8 @@
 package com.solvd.aviacompany.utils.menu;
 
 import com.solvd.aviacompany.db.dao.IBaseDao;
+import com.solvd.aviacompany.db.dao.impl.FlightDaoImpl;
+import com.solvd.aviacompany.hierarchy.Flight;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,5 +41,20 @@ public class CasePrint {
             }
         }
         return currentOption;
+    }
+
+    public MenuOptions printFlights(){
+        IBaseDao<Flight> flightIBaseDao = new FlightDaoImpl();
+        List<Flight> flights = flightIBaseDao.read();
+        if(flights.isEmpty()){
+            logger.info("Sorry we don't have any available flights right now");
+        }
+        else{
+            logger.info("Here are all flights we have right now:");
+            for(Flight f : flights){
+                logger.info(f.toString());
+            }
+        }
+        return MenuOptions.ALL;
     }
 }

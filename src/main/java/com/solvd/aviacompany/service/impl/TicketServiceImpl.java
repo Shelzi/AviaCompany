@@ -19,4 +19,9 @@ public class TicketServiceImpl implements TicketService {
     public List<Ticket> getAllTickets() {
         return iTicketDao.read();
     }
+
+    public int getAutoIncrement() {
+        return iTicketDao.getAutoIncrement();
+    }
+
 }

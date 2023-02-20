@@ -113,4 +113,18 @@ public class PassengerDaoImpl implements IPassengerDao {
     public boolean delete(Passenger passenger) {
         return false;
     }
+
+    public int getAutoIncrement(){
+        int id = 1;
+        try (Connection c = pool.takeConnection();
+             PreparedStatement preparedStatement = c.prepareStatement(SqlQuery.SQL_GET_AUTO_INCREMENT)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                id = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            logger.warn("Wrong statement / Invalid field" + e.getMessage());
+        }
+        return id;
+    }
 }

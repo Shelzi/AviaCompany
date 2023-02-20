@@ -28,16 +28,15 @@ public class GetDao {
                                 
                 (1)  * CITIES
                 (2)  * COUNTRIES
-                (3)  * FLIGHTS
-                (4)  * TICKETS
-                (5)  * PASSENGERS
+                (3)  * TICKETS
+                (4)  * PASSENGERS
 
                 (0)  * BACK
                 """);
         IBaseDao dao = null;
         int k = -1;
         boolean validInt = false;
-        k = ScannerGetter.getInt(sc, 0, 5);
+        k = ScannerGetter.getInt(sc, 0, 4);
         switch (k) {
             case 1 -> {
                 dao = new CityDaoImpl();
@@ -48,18 +47,13 @@ public class GetDao {
                 choice = AvailableOptions.COUNTRIES;
             }
             case 3 -> {
-                dao = new FlightDaoImpl();
-                choice = AvailableOptions.FLIGHTS;
-            }
-            case 4 -> {
                 dao = new TicketDaoImpl();
                 choice = AvailableOptions.TICKETS;
             }
-            case 5 -> {
+            case 4 -> {
                 dao = new PassengerDaoImpl();
                 choice = AvailableOptions.PASSENGERS;
             }
-
             default -> {
                 choice = AvailableOptions.BACK;
                 //currentOption = Main.Main.MenuOptions.ALL;

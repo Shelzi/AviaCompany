@@ -28,17 +28,11 @@ public class MenuService {
                 case PRINT -> {
                     currentOption = casePrint.print(sc, choice, getDao);
                 }
-                case ADD -> {
-                    //currentOption = CaseADD.add(logger, sc, choice);
-                }
-                case UPDATE -> {
-                    //currentOption = CaseUPDATE.update(logger, sc, choice);
-                }
-                case DELETE -> {
-                    //currentOption = CaseDELETE.delete(logger, sc, choice);
+                case PRINT_FLIGHTS -> {
+                    currentOption = casePrint.printFlights();
                 }
                 case BOOK_FLIGHT -> {
-                    currentOption = caseBookFlight.book(sc, choice);
+                    currentOption = caseBookFlight.bookFlight(sc, choice);
                 }
                 case EXIT -> {
                     currentOption = caseExit.exit(sc, exit);

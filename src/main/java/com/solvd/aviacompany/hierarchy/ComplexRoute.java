@@ -3,7 +3,9 @@ package com.solvd.aviacompany.hierarchy;
 import com.solvd.aviacompany.db.dao.IBaseDao;
 import com.solvd.aviacompany.db.dao.impl.FlightDaoImpl;
 import com.solvd.aviacompany.db.dao.pool.ConnectionPool;
+import com.solvd.aviacompany.service.impl.FlightServiceImpl;
 import com.solvd.aviacompany.service.impl.IntIntPair;
+import com.solvd.aviacompany.service.impl.TicketServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +27,8 @@ public class ComplexRoute {
     @XmlElementWrapper(name = "Cities")
     @XmlElement(name = "citiy")
     private List<City> cities;
+
+
     @XmlElementWrapper(name = "Weights")
     @XmlElement(name = "weight")
     private List<IntIntPair> weights;
@@ -33,12 +37,14 @@ public class ComplexRoute {
         if (cities.isEmpty())
             return new ArrayList<>();
         List<Ticket> tickets = new ArrayList<>();
-        FlightDaoImpl flightIBaseDao = new FlightDaoImpl();
+        FlightServiceImpl flightIBaseDao = new FlightServiceImpl();
+        TicketServiceImpl ticketService = new TicketServiceImpl();
         for (int i = 0; i < cities.size() - 1; i++) {
             Flight flight =
                     flightIBaseDao.getFlightByDepId(cities.get(i).getId(), cities.get(i + 1).getId(),
                             weights.get(i).getA(), weights.get(i).getB()).orElse(new Flight());
             Ticket ticket = Ticket.builder()
+                    .id(ticketService.getAutoIncrement())
                     .passenger(passenger)
                     .flight(flight)
                     .build();

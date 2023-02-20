@@ -67,4 +67,11 @@ public class SqlQuery {
                     "WHERE flights.dep_city_id = ? AND flights.dest_city_id = ? AND flights.cost = ? " +
                     "AND flights.distance = ?";
 
+    public static final String SQL_GET_AUTO_INCREMENT = """
+                    SELECT `AUTO_INCREMENT`
+                    FROM  INFORMATION_SCHEMA.TABLES
+                    WHERE TABLE_SCHEMA = 'AviaCompany'
+                    AND   TABLE_NAME   = 'tickets';
+                    """;
+
 }

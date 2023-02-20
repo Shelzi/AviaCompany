@@ -9,4 +9,6 @@ public interface FlightService {
     List<Flight> getFlights();
 
     Optional<Flight> getFlightById(int id);
+
+    public Optional<Flight> getFlightByDepId(int dep_id, int dest_id, int cost, int distance);
 }

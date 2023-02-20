@@ -3,7 +3,7 @@ package com.solvd.aviacompany.utils.menu;
 public enum MenuOptions {
     ALL,
     PRINT,
-    ADD,
+    PRINT_FLIGHTS,
     UPDATE,
     DELETE,
     BOOK_FLIGHT,

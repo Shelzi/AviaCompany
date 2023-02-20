@@ -1,11 +1,7 @@
 package com.solvd.aviacompany.utils.menu;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.solvd.aviacompany.db.dao.impl.PassengerDaoImpl;
-import com.solvd.aviacompany.db.dao.impl.TicketDaoImpl;
 import com.solvd.aviacompany.hierarchy.City;
 import com.solvd.aviacompany.hierarchy.ComplexRoute;
 import com.solvd.aviacompany.hierarchy.Passenger;
@@ -27,6 +23,8 @@ import java.util.Scanner;
 public class CaseBookFlight {
     private final FlightServiceImpl flightService = new FlightServiceImpl();
     private final CityServiceImpl cityService = new CityServiceImpl();
+
+    private final PassengerServiceImpl passengerService  = new PassengerServiceImpl();
     private static final Logger logger = LogManager.getLogger();
 
     private Optional<ComplexRoute> floydShortest(String from, String to, boolean distance) {
@@ -54,13 +52,21 @@ public class CaseBookFlight {
         return floydShortest(from, to, false);
     }
 
-    public MenuOptions book(Scanner sc, GetDao.AvailableOptions choice) {
+    public MenuOptions bookFlight(Scanner sc, GetDao.AvailableOptions choice) {
         MenuOptions currentOption;
 
         String from, to;
         boolean stillChoosing;
         boolean buyingTicket;
         ComplexRoute flightToBuy;
+        logger.info("Please enter passenger info:");
+        logger.info("First name:");
+        String firstName = ScannerGetter.getString(sc);
+        logger.info("Last name:");
+        String lastName = ScannerGetter.getString(sc);
+        Optional<Passenger> passengerOptional = passengerService.getPassengerByFirstAndLastName(firstName, lastName);
+        Passenger p = passengerOptional.orElse(new Passenger(passengerService.getAutoIncrement(), firstName, lastName));
+        passengerService.addPassenger(p);
 
         do {
             flightToBuy = null;
@@ -70,8 +76,6 @@ public class CaseBookFlight {
             from = ScannerGetter.getString(sc);
             logger.info(" TO:");
             to = ScannerGetter.getString(sc);
-            //from = "London";
-            //to = "Vienna";
             Optional<ComplexRoute> shortest = floydShortest(from, to, true);
             if (shortest.isEmpty() || shortest.get().getCities().isEmpty()) {
                 logger.info(" We are sorry, but there is no available route from " + from + " to " + to);
@@ -144,21 +148,15 @@ public class CaseBookFlight {
                 }
             }
             if (flightToBuy != null) {
-                logger.info("Great then provide us passenger data:");
-                logger.info("First Name:");
-                String fname = ScannerGetter.getString(sc);
-                logger.info("Last Name");
-                String lname = ScannerGetter.getString(sc);
-                Passenger p = new Passenger(1, fname, lname);
-                PassengerServiceImpl passengerDao = new PassengerServiceImpl();
-                passengerDao.addPassenger(p);
-                p = passengerDao.getPassengerByFirstAndLastName(p.getFirstName(), p.getLastName()).orElse(p);
+                logger.info("Great! Tickets for passenger " + p.getFirstName() + " " + p.getLastName() +
+                        " have been written to file Tickets.json, have a great fly");
+
                 List<Ticket> tickets = flightToBuy.getFlights(p);
                 TicketServiceImpl ticketDao = new TicketServiceImpl();
                 for(Ticket t : tickets) {
                     ticketDao.addTicket(t);
                 }
-                ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.WRAP_ROOT_VALUE);
+                ObjectMapper objectMapper = new ObjectMapper();
                 try {
                     FileUtils.write(new File("Tickets.json"), objectMapper.writeValueAsString(tickets),
                             StandardCharsets.UTF_8);

@@ -25,4 +25,10 @@ public class FlightServiceImpl implements FlightService {
     public Optional<Flight> getFlightById(int id){
         return iFlightDao.read(id);
     }
+
+
+    @Override
+    public Optional<Flight> getFlightByDepId(int dep_id, int dest_id, int cost, int distance) {
+        return iFlightDao.getFlightByDepId(dep_id, dest_id, cost, distance);
+    }
 }
