@@ -1,12 +1,14 @@
 package com.solvd.aviacompany.utils.menu;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CaseExit {
-    public MenuOptions exit(Logger logger, Scanner sc, AtomicBoolean exit) {
+    private static final Logger logger = LogManager.getLogger();
+    public MenuOptions exit(Scanner sc, AtomicBoolean exit) {
          MenuOptions currentOption =  MenuOptions.ALL;
         logger.info("\n     * ARE YOU SURE (y/n):");
         char ch = 's';

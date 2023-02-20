@@ -1,6 +1,7 @@
 package com.solvd.aviacompany.utils.menu;
 
 import com.solvd.aviacompany.db.dao.IBaseDao;
+import com.solvd.aviacompany.db.dao.impl.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,10 +9,10 @@ import java.util.Scanner;
 
 public class GetDao {
     public enum AvailableOptions {
-        AIRPORTS,
+        CITIES,
         FLIGHTS,
-        PILOTS,
-        PLANES,
+        COUNTRIES,
+        PASSENGERS,
         TICKETS,
         BACK
     }
@@ -25,46 +26,38 @@ public class GetDao {
     public IBaseDao getDao(Scanner sc) {
         logger.info("""
                                 
-                (1)  * AIRPORTS
-                (2)  * FLIGHTS
-                (3)  * PILOTS
-                (4)  * PLANES
-                (5)  * TICKETS
+                (1)  * CITIES
+                (2)  * COUNTRIES
+                (3)  * FLIGHTS
+                (4)  * TICKETS
+                (5)  * PASSENGERS
 
                 (0)  * BACK
                 """);
         IBaseDao dao = null;
         int k = -1;
         boolean validInt = false;
-        do {
-            try {
-
-                k = Integer.parseInt(sc.nextLine());
-                validInt = true;
-            } catch (NumberFormatException e) {
-                validInt = false;
-            }
-        } while (!validInt || k < 0 || k > 5);
+        k = ScannerGetter.getInt(sc, 0, 5);
         switch (k) {
             case 1 -> {
-                //dao = new AirportDao();
-                choice = AvailableOptions.AIRPORTS;
+                dao = new CityDaoImpl();
+                choice = AvailableOptions.CITIES;
             }
             case 2 -> {
-                //dao = (myBatis) ? new FlightService() : new FlightDao();
-                choice = AvailableOptions.FLIGHTS;
+                dao = new CountryDaoImpl();
+                choice = AvailableOptions.COUNTRIES;
             }
             case 3 -> {
-                //dao = (myBatis) ? new PilotService() : new PilotDao();
-                choice = AvailableOptions.PILOTS;
+                dao = new FlightDaoImpl();
+                choice = AvailableOptions.FLIGHTS;
             }
             case 4 -> {
-                //dao = (myBatis) ? new PlaneService() : new PlaneDao();
-                choice = AvailableOptions.PLANES;
+                dao = new TicketDaoImpl();
+                choice = AvailableOptions.TICKETS;
             }
             case 5 -> {
-                //dao = (myBatis) ? new TicketService() : new TicketDao();
-                choice = AvailableOptions.TICKETS;
+                dao = new PassengerDaoImpl();
+                choice = AvailableOptions.PASSENGERS;
             }
 
             default -> {

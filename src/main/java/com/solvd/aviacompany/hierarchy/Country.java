@@ -12,4 +12,12 @@ import lombok.NoArgsConstructor;
 public class Country {
     private int id;
     private String name;
+
+    @Override
+    public String toString() {
+        return "(" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ')';
+    }
 }

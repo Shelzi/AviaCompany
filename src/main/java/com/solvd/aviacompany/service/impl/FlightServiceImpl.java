@@ -18,18 +18,6 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public List<Flight> getFlights() {
-        //List<Flight> flightList = iFlightDao.read();
-/*        List<Flight> flightList = new ArrayList<>(List.of());
-        City brest = new City(3, "brest", new Country());
-        City minsk = new City(1, "minsk", new Country());
-        City gomel = new City(2, "gomel", new Country());
-        Flight f1 = new Flight(1, minsk, brest , 100, 1000);
-        Flight f2 = new Flight(2, brest , gomel, 200, 1200);
-        Flight f3 = new Flight(3, gomel, minsk, 300, 500);
-        flightList.add(f1);
-        flightList.add(f2);
-        flightList.add(f3);*/
-        //flightList.sort(Comparator.comparingInt(Flight::getId));
         return iFlightDao.read();
     }
 

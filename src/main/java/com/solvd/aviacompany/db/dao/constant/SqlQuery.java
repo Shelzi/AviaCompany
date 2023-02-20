@@ -60,4 +60,22 @@ public class SqlQuery {
             "LEFT JOIN country dep_co ON dep_city.country_id = dep_co.id " +
             "LEFT JOIN country dest_co ON dest_city.country_id = dest_co.id";
 
+    public static final String SQL_GET_FLIGHT_ID_BY_DEP_DEST =
+            "SELECT * FROM flights " +
+                    "JOIN city a ON flights.dep_city_id = a.id " +
+                    "JOIN city b ON flights.dest_city_id = b.id " +
+                    "JOIN country a_country ON a.country_id = a_country.id " +
+                    "JOIN country b_country ON b.country_id = b_country.id " +
+                    "WHERE flights.dep_city_id = ? AND flights.dest_city_id = ? AND flights.cost = ? " +
+                    "AND flights.distance = ?";
+
+    public static final String SQL_GET_FLIGHT_BY_DEP_DEST =
+            "SELECT * FROM flights " +
+                    "JOIN city a ON flights.dep_city_id = a.id " +
+                    "JOIN city b ON flights.dest_city_id = b.id " +
+                    "JOIN country a_country ON a.country_id = a_country.id " +
+                    "JOIN country b_country ON b.country_id = b_country.id " +
+                    "WHERE flights.dep_city_id = ? AND flights.dest_city_id = ? AND flights.cost = ? " +
+                    "AND flights.distance = ?";
+
 }

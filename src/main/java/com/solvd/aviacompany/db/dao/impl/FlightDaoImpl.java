@@ -3,7 +3,7 @@ package com.solvd.aviacompany.db.dao.impl;
 import com.solvd.aviacompany.db.dao.IFlightDao;
 import com.solvd.aviacompany.db.dao.constant.SqlQuery;
 import com.solvd.aviacompany.db.dao.mapper.BaseMapper;
-import com.solvd.aviacompany.db.dao.mapper.impl.FlightMapper;
+import com.solvd.aviacompany.db.dao.mapper.impl.CustomFlightMapper;
 import com.solvd.aviacompany.db.dao.pool.ConnectionPool;
 import com.solvd.aviacompany.hierarchy.Flight;
 import org.apache.logging.log4j.LogManager;
@@ -21,7 +21,7 @@ import java.util.Optional;
 public class FlightDaoImpl implements IFlightDao {
     private static final Logger logger = LogManager.getLogger();
     private static final ConnectionPool pool = ConnectionPool.getInstance();
-    private static final BaseMapper<Flight> flightMapper = new FlightMapper();
+    private static final BaseMapper<Flight> customFlightMapper = new CustomFlightMapper();
 
     @Override
     public boolean create(Flight flight) {
@@ -49,14 +49,7 @@ public class FlightDaoImpl implements IFlightDao {
              PreparedStatement preparedStatement = c.prepareStatement(SqlQuery.SQL_GET_ALL_FLIGHTS)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Flight flight = Flight.builder()
-                        .destination(new CityDaoImpl().read(resultSet.getInt("flights.dest_city_id")).get())
-                        .departure(new CityDaoImpl().read(resultSet.getInt("flights.dep_city_id")).get())
-                        .id(resultSet.getInt("flights.id"))
-                        .cost(resultSet.getInt("flights.cost"))
-                        .distance(resultSet.getInt("flights.distance"))
-                        .build();
-                flightList.add(flight);
+                flightList.add(new CustomFlightMapper().map(resultSet));
                 //TODO: rewrite to normal mapper, this is bad realisation of Dao read() method. Maybe do building in service
                 //flightList.add(flightMapper.map(resultSet));
             }
@@ -74,7 +67,25 @@ public class FlightDaoImpl implements IFlightDao {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                flightOptional = Optional.of(flightMapper.map(resultSet));
+                flightOptional = Optional.of(customFlightMapper.map(resultSet));
+            }
+        } catch (SQLException e) {
+            logger.warn("Wrong statement / Invalid field");
+        }
+        return flightOptional;
+    }
+
+    public Optional<Flight> getFlightByDepId(int dep_id, int dest_id, int cost, int distance){
+        Optional<Flight> flightOptional = Optional.empty();
+        try (Connection c = pool.takeConnection();
+             PreparedStatement preparedStatement = c.prepareStatement(SqlQuery.SQL_GET_FLIGHT_BY_DEP_DEST)) {
+            preparedStatement.setInt(1, dep_id);
+            preparedStatement.setInt(2, dest_id);
+            preparedStatement.setInt(3, cost);
+            preparedStatement.setInt(4, distance);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                flightOptional = Optional.of(customFlightMapper.map(resultSet));
             }
         } catch (SQLException e) {
             logger.warn("Wrong statement / Invalid field");

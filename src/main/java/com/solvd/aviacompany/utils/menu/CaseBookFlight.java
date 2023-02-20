@@ -1,24 +1,29 @@
 package com.solvd.aviacompany.utils.menu;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.solvd.aviacompany.db.dao.impl.PassengerDaoImpl;
+import com.solvd.aviacompany.db.dao.impl.TicketDaoImpl;
 import com.solvd.aviacompany.hierarchy.City;
 import com.solvd.aviacompany.hierarchy.ComplexRoute;
 import com.solvd.aviacompany.hierarchy.Passenger;
 import com.solvd.aviacompany.hierarchy.Ticket;
-import com.solvd.aviacompany.service.impl.CityServiceImpl;
-import com.solvd.aviacompany.service.impl.FlightServiceImpl;
-import com.solvd.aviacompany.service.impl.FloydPairs;
-import com.solvd.aviacompany.service.impl.IntIntPair;
-import com.solvd.aviacompany.service.impl.PairGraphBuilder;
+import com.solvd.aviacompany.service.impl.*;
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
-
 public class CaseBookFlight {
     private final FlightServiceImpl flightService = new FlightServiceImpl();
     private final CityServiceImpl cityService = new CityServiceImpl();
@@ -32,9 +37,12 @@ public class CaseBookFlight {
                         cityNameToIndexMap,
                         cityIndextoCityMap);
         List<IntIntPair> weights = new ArrayList<>();
-        int fromId = cityNameToIndexMap.get(from);
-        int toId = cityNameToIndexMap.get(to);
-        if (fromId == -1 || toId == -1) {
+        if(cityIndextoCityMap.isEmpty() || cityNameToIndexMap.isEmpty()){
+            return Optional.empty();
+        }
+        Integer fromId = cityNameToIndexMap.get(from);
+        Integer toId = cityNameToIndexMap.get(to);
+        if (fromId == null || toId == null) {
             return Optional.empty();
         }
         List<Integer> ids = new FloydPairs().findPath(graph, fromId, toId, distance, weights);
@@ -142,7 +150,21 @@ public class CaseBookFlight {
                 logger.info("Last Name");
                 String lname = ScannerGetter.getString(sc);
                 Passenger p = new Passenger(1, fname, lname);
+                PassengerServiceImpl passengerDao = new PassengerServiceImpl();
+                passengerDao.addPassenger(p);
+                p = passengerDao.getPassengerByFirstAndLastName(p.getFirstName(), p.getLastName()).orElse(p);
                 List<Ticket> tickets = flightToBuy.getFlights(p);
+                TicketServiceImpl ticketDao = new TicketServiceImpl();
+                for(Ticket t : tickets) {
+                    ticketDao.addTicket(t);
+                }
+                ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.WRAP_ROOT_VALUE);
+                try {
+                    FileUtils.write(new File("Tickets.json"), objectMapper.writeValueAsString(tickets),
+                            StandardCharsets.UTF_8);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
         while (stillChoosing);

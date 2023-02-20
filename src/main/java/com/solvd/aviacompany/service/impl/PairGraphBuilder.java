@@ -15,6 +15,7 @@ public class PairGraphBuilder {
                                             Map<String, Integer> cityNameToIndexMap,
                                             Map<Integer, City> cityIndextoCityMap) {
         // Create a map from city IDs to city objects
+
         Map<Integer, City> cityMap = new TreeMap<>();
         for (Flight flight : flightList) {
             cityMap.put(flight.getDeparture().getId(), flight.getDeparture());

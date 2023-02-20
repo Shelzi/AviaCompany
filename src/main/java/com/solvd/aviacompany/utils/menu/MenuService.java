@@ -19,13 +19,14 @@ public class MenuService {
     public void menu() {
         Scanner sc = new Scanner(System.in);
         AtomicBoolean exit = new AtomicBoolean(false);
+        logger.info("HI");
         while (!exit.get()) {
             switch (currentOption) {
                 case ALL -> {
-                    currentOption = caseAll.all(logger, sc);
+                    currentOption = caseAll.all(sc);
                 }
                 case PRINT -> {
-                    currentOption = casePrint.print(logger, sc, choice, getDao);
+                    currentOption = casePrint.print(sc, choice, getDao);
                 }
                 case ADD -> {
                     //currentOption = CaseADD.add(logger, sc, choice);
@@ -37,10 +38,10 @@ public class MenuService {
                     //currentOption = CaseDELETE.delete(logger, sc, choice);
                 }
                 case BOOK_FLIGHT -> {
-                    currentOption = caseBookFlight.book(logger, sc, choice);
+                    currentOption = caseBookFlight.book(sc, choice);
                 }
                 case EXIT -> {
-                    currentOption = caseExit.exit(logger, sc, exit);
+                    currentOption = caseExit.exit(sc, exit);
                 }
                 default -> {
                     logger.fatal("INVALID ENUM CASE");

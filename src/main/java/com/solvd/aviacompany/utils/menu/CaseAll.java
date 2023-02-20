@@ -1,11 +1,13 @@
 package com.solvd.aviacompany.utils.menu;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Scanner;
 
 public class CaseAll {
-    public MenuOptions all(Logger logger, Scanner sc) {
+    private static final Logger logger = LogManager.getLogger();
+    public MenuOptions all(Scanner sc) {
         MenuOptions currentOption = MenuOptions.ALL;
         logger.info("""
                                         

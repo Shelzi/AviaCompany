@@ -36,7 +36,7 @@ public class TicketDaoImpl implements ITicketDao {
                 return false;
             }
         } catch (SQLException e) {
-            logger.warn("Wrong statement  / Invalid field");
+            logger.warn("Wrong statement  / Invalid field" + e.getMessage());
         }
         return true;
     }
@@ -51,7 +51,7 @@ public class TicketDaoImpl implements ITicketDao {
                 ticketList.add(ticketMapper.map(resultSet));
             }
         } catch (SQLException e) {
-            logger.warn("Wrong statement / Invalid field");
+            logger.warn("Wrong statement / Invalid field" + e.getMessage());
         }
         return ticketList;
     }

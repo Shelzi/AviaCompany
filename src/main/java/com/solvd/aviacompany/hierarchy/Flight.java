@@ -16,12 +16,14 @@ public class Flight {
     private int cost;
     private int distance;
 
+
     @Override
     public String toString() {
         return "Flight{\n" +
-                "        departure = '" + departure + "'\n" +
-                "        destination = '" + destination + "'\n" +
-                "        cost = " + cost + "$\n" +
+                "        id = " + id + "\n" +
+                "        departure = " + departure + "\n" +
+                "        destination = " + destination + "\n" +
+                "        cost = " + cost + " $\n" +
                 "        distance = " + distance + " km\n";
 
     }
