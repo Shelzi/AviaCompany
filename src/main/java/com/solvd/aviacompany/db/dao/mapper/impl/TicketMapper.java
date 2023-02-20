@@ -11,7 +11,7 @@ public class TicketMapper implements BaseMapper<Ticket> {
     public Ticket map(ResultSet resultSet) throws SQLException {
         return Ticket.builder()
                 .id(resultSet.getInt("tickets.id"))
-                .flight(new FlightMapper().map(resultSet))
+                .flight(new CustomFlightMapper().map(resultSet))
                 .passenger(new PassengerMapper().map(resultSet))
                 .build();
     }
