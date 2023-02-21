@@ -23,20 +23,19 @@ public class GetDao {
         return choice;
     }
 
-    public IBaseDao getDao(Scanner sc) {
+    public IBaseDao<?> getDao(Scanner sc) {
         logger.info("""
                                 
                 (1)  * CITIES
                 (2)  * COUNTRIES
-                (3)  * TICKETS
-                (4)  * PASSENGERS
+                (3)  * PASSENGERS
 
                 (0)  * BACK
                 """);
-        IBaseDao dao = null;
+        IBaseDao<?> dao = null;
         int k = -1;
         boolean validInt = false;
-        k = ScannerGetter.getInt(sc, 0, 4);
+        k = ScannerGetter.getInt(sc, 0, 3);
         switch (k) {
             case 1 -> {
                 dao = new CityDaoImpl();
@@ -47,10 +46,6 @@ public class GetDao {
                 choice = AvailableOptions.COUNTRIES;
             }
             case 3 -> {
-                dao = new TicketDaoImpl();
-                choice = AvailableOptions.TICKETS;
-            }
-            case 4 -> {
                 dao = new PassengerDaoImpl();
                 choice = AvailableOptions.PASSENGERS;
             }

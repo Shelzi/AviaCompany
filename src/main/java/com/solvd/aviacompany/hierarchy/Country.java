@@ -5,12 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.xml.bind.annotation.*;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@XmlRootElement(name = "country")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Country {
+    @XmlAttribute
     private int id;
+    @XmlElement
     private String name;
 
     @Override

@@ -39,12 +39,13 @@ public class ComplexRoute {
         List<Ticket> tickets = new ArrayList<>();
         FlightServiceImpl flightIBaseDao = new FlightServiceImpl();
         TicketServiceImpl ticketService = new TicketServiceImpl();
+        int id = ticketService.getAutoIncrement() + 1;
         for (int i = 0; i < cities.size() - 1; i++) {
             Flight flight =
                     flightIBaseDao.getFlightByDepId(cities.get(i).getId(), cities.get(i + 1).getId(),
                             weights.get(i).getA(), weights.get(i).getB()).orElse(new Flight());
             Ticket ticket = Ticket.builder()
-                    .id(ticketService.getAutoIncrement())
+                    .id(id++)
                     .passenger(passenger)
                     .flight(flight)
                     .build();

@@ -1,5 +1,6 @@
 package com.solvd.aviacompany.utils.menu;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.solvd.aviacompany.hierarchy.City;
@@ -7,10 +8,13 @@ import com.solvd.aviacompany.hierarchy.ComplexRoute;
 import com.solvd.aviacompany.hierarchy.Passenger;
 import com.solvd.aviacompany.hierarchy.Ticket;
 import com.solvd.aviacompany.service.impl.*;
+import com.solvd.aviacompany.utils.xml.Jaxb;
+import com.solvd.aviacompany.utils.xml.XmlTicket;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -20,11 +24,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
+
 public class CaseBookFlight {
     private final FlightServiceImpl flightService = new FlightServiceImpl();
     private final CityServiceImpl cityService = new CityServiceImpl();
 
-    private final PassengerServiceImpl passengerService  = new PassengerServiceImpl();
+    private final PassengerServiceImpl passengerService = new PassengerServiceImpl();
     private static final Logger logger = LogManager.getLogger();
 
     private Optional<ComplexRoute> floydShortest(String from, String to, boolean distance) {
@@ -35,7 +40,7 @@ public class CaseBookFlight {
                         cityNameToIndexMap,
                         cityIndextoCityMap);
         List<IntIntPair> weights = new ArrayList<>();
-        if(cityIndextoCityMap.isEmpty() || cityNameToIndexMap.isEmpty()){
+        if (cityIndextoCityMap.isEmpty() || cityNameToIndexMap.isEmpty()) {
             return Optional.empty();
         }
         Integer fromId = cityNameToIndexMap.get(from);
@@ -49,7 +54,7 @@ public class CaseBookFlight {
     }
 
     private Optional<ComplexRoute> floydCheapest(String from, String to) {
-        return floydShortest(from, to, false);
+        return floydShortest(from, to, true);
     }
 
     public MenuOptions bookFlight(Scanner sc, GetDao.AvailableOptions choice) {
@@ -65,8 +70,14 @@ public class CaseBookFlight {
         logger.info("Last name:");
         String lastName = ScannerGetter.getString(sc);
         Optional<Passenger> passengerOptional = passengerService.getPassengerByFirstAndLastName(firstName, lastName);
-        Passenger p = passengerOptional.orElse(new Passenger(passengerService.getAutoIncrement(), firstName, lastName));
-        passengerService.addPassenger(p);
+        Passenger p;
+        if (passengerOptional.isEmpty()) {
+            p = new Passenger(passengerService.getAutoIncrement(), firstName, lastName);
+            passengerService.addPassenger(p);
+        } else {
+            p = passengerOptional.get();
+        }
+
 
         do {
             flightToBuy = null;
@@ -76,7 +87,7 @@ public class CaseBookFlight {
             from = ScannerGetter.getString(sc);
             logger.info(" TO:");
             to = ScannerGetter.getString(sc);
-            Optional<ComplexRoute> shortest = floydShortest(from, to, true);
+            Optional<ComplexRoute> shortest = floydShortest(from, to, false);
             if (shortest.isEmpty() || shortest.get().getCities().isEmpty()) {
                 logger.info(" We are sorry, but there is no available route from " + from + " to " + to);
                 logger.info(""" 
@@ -149,19 +160,25 @@ public class CaseBookFlight {
             }
             if (flightToBuy != null) {
                 logger.info("Great! Tickets for passenger " + p.getFirstName() + " " + p.getLastName() +
-                        " have been written to file Tickets.json, have a great fly");
-
+                        " have been written to file Tickets.json [.xml], have a great fly");
+                IntIntPair wei = flightToBuy.getTotalWeight();
                 List<Ticket> tickets = flightToBuy.getFlights(p);
                 TicketServiceImpl ticketDao = new TicketServiceImpl();
-                for(Ticket t : tickets) {
+                for (Ticket t : tickets) {
                     ticketDao.addTicket(t);
                 }
                 ObjectMapper objectMapper = new ObjectMapper();
                 try {
-                    FileUtils.write(new File("Tickets.json"), objectMapper.writeValueAsString(tickets),
+                    String json = objectMapper.writeValueAsString(new XmlTicket(tickets, wei));
+                    FileUtils.write(new File("Tickets.json"), json,
                             StandardCharsets.UTF_8);
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    logger.warn(e.getMessage());
+                }
+                try {
+                    new Jaxb().marshalTickets(tickets, wei, "Tickets.xml");
+                } catch (JAXBException | IOException e) {
+                    logger.warn(e.getMessage());
                 }
             }
         }
