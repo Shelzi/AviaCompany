@@ -19,7 +19,7 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "Flight{\n" +
+        return "Flight\n" +
                 "        id = " + id + "\n" +
                 "        departure = " + departure + "\n" +
                 "        destination = " + destination + "\n" +

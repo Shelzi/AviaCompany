@@ -19,10 +19,6 @@ public class City {
 
     @Override
     public String toString() {
-        return "(" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", country:" + country +
-                ')';
+        return name + " , country: " + country.getName();
     }
 }
