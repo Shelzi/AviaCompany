@@ -1,6 +1,5 @@
 package com.solvd.aviacompany;
 
-import com.solvd.aviacompany.db.dao.impl.FlightDaoImpl;
 import com.solvd.aviacompany.db.dao.pool.ConnectionPool;
 import com.solvd.aviacompany.utils.menu.MenuService;
 import org.apache.logging.log4j.LogManager;
@@ -16,6 +15,5 @@ public class Main {
         }
         MenuService menuService = new MenuService();
         menuService.menu();
-
     }
 }

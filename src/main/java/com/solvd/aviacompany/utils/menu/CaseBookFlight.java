@@ -72,8 +72,9 @@ public class CaseBookFlight {
         Optional<Passenger> passengerOptional = passengerService.getPassengerByFirstAndLastName(firstName, lastName);
         Passenger p;
         if (passengerOptional.isEmpty()) {
-            p = new Passenger(passengerService.getAutoIncrement(), firstName, lastName);
+            p = Passenger.builder().firstName(firstName).lastName(lastName).build();
             passengerService.addPassenger(p);
+            p = passengerService.getPassengerByFirstAndLastName(firstName, lastName).get();
         } else {
             p = passengerOptional.get();
         }
